@@ -1,16 +1,14 @@
 import { Resend } from "resend";
 import { NextResponse } from "next/server";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 type CartItem = {
   name: string;
-  brand: string;
-  ca: string;
+  code: string;
   quantity: number;
 };
 
 export async function POST(req: Request) {
+  const resend = new Resend(process.env.RESEND_API_KEY);
   try {
     const body = await req.json();
     const { nome, empresa, email, whatsapp, observacoes, items } = body as {
@@ -31,8 +29,7 @@ export async function POST(req: Request) {
         (item) => `
         <tr>
           <td style="padding:10px 12px;border-bottom:1px solid #e2e8f0;font-size:14px;color:#1e293b;">${item.name}</td>
-          <td style="padding:10px 12px;border-bottom:1px solid #e2e8f0;font-size:14px;color:#64748b;">${item.brand}</td>
-          <td style="padding:10px 12px;border-bottom:1px solid #e2e8f0;font-size:14px;color:#64748b;">${item.ca}</td>
+          <td style="padding:10px 12px;border-bottom:1px solid #e2e8f0;font-size:14px;color:#64748b;">${item.code}</td>
           <td style="padding:10px 12px;border-bottom:1px solid #e2e8f0;font-size:14px;font-weight:700;color:#1a4f9c;text-align:center;">${item.quantity}</td>
         </tr>`
       )
@@ -76,8 +73,7 @@ export async function POST(req: Request) {
             <thead>
               <tr style="background:#f1f5f9;">
                 <th style="padding:10px 12px;text-align:left;font-size:12px;font-weight:700;color:#64748b;text-transform:uppercase;">Produto</th>
-                <th style="padding:10px 12px;text-align:left;font-size:12px;font-weight:700;color:#64748b;text-transform:uppercase;">Marca</th>
-                <th style="padding:10px 12px;text-align:left;font-size:12px;font-weight:700;color:#64748b;text-transform:uppercase;">CA</th>
+                <th style="padding:10px 12px;text-align:left;font-size:12px;font-weight:700;color:#64748b;text-transform:uppercase;">Código</th>
                 <th style="padding:10px 12px;text-align:center;font-size:12px;font-weight:700;color:#64748b;text-transform:uppercase;">Qtd.</th>
               </tr>
             </thead>
