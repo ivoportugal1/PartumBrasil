@@ -1,0 +1,22 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #1a4f9c;
+  --color-primary-dark: #0f3272;
+  --color-primary-light: #2a6dd9;
+  --color-accent: #f97316;
+  --color-surface: #f1f5f9;
+  --font-sans: "Geist", system-ui, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+}
