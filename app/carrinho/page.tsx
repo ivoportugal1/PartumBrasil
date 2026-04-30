@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
+import ProductImage from "@/components/ProductImage";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { useCart } from "@/lib/cart-context";
@@ -126,13 +126,13 @@ export default function CartPage() {
                       <div key={product.id} className="flex items-center gap-4 px-6 py-4">
                         {/* Imagem */}
                         <div className="relative w-16 h-16 bg-surface rounded-lg shrink-0 overflow-hidden">
-                          <Image src={product.image} alt={product.name} fill className="object-contain p-2" />
+                          <ProductImage code={product.code} imageCode={product.imageCode} name={product.name} category={product.category} size="card" />
                         </div>
 
                         {/* Info */}
                         <div className="flex-1 min-w-0">
                           <Link
-                            href={`/produtos/${product.categorySlug}/${product.slug}`}
+                            href={`/produtos/${product.category}/${product.slug}`}
                             className="font-semibold text-gray-900 text-sm hover:text-primary transition-colors line-clamp-2"
                           >
                             {product.name}
