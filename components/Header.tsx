@@ -48,7 +48,7 @@ export default function Header() {
               alt="Partum Brasil"
               width={240}
               height={64}
-              className="h-14 w-auto"
+              className="h-12 w-auto max-w-[160px] sm:max-w-[240px]"
               priority
             />
           </Link>
