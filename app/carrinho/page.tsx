@@ -27,8 +27,7 @@ export default function CartPage() {
       observacoes: (form.elements.namedItem("observacoes") as HTMLTextAreaElement).value,
       items: items.map(({ product, quantity }) => ({
         name: product.name,
-        brand: product.brand,
-        ca: product.ca,
+        code: product.code,
         quantity,
       })),
     };
@@ -138,7 +137,7 @@ export default function CartPage() {
                           >
                             {product.name}
                           </Link>
-                          <p className="text-xs text-gray-400 mt-0.5">{product.brand} · {product.ca}</p>
+                          <p className="text-xs text-gray-400 mt-0.5">{product.code}</p>
                         </div>
 
                         {/* Quantity */}
