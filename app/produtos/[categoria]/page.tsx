@@ -43,25 +43,25 @@ export default async function CategoryPage({
 
         {/* Filtros e pesquisa */}
         <div className="bg-white border-b border-gray-100 sticky top-16 z-30">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex flex-col sm:flex-row gap-3 items-start sm:items-center justify-between">
-            {/* Categorias */}
-            <div className="flex gap-2 overflow-x-auto pb-1 sm:pb-0 shrink-0">
-              {categories.map((cat) => (
-                <Link
-                  key={cat.slug}
-                  href={`/produtos/${cat.slug}`}
-                  className={`shrink-0 px-3 py-1.5 rounded-full text-xs font-semibold transition-colors border
-                    ${cat.slug === categoria
-                      ? "bg-primary text-white border-primary"
-                      : "text-gray-600 border-gray-200 hover:border-primary hover:text-primary bg-white"
-                    }`}
-                >
-                  {cat.name}
-                  <span className="ml-1 opacity-60">({getCategoryCount(cat.slug)})</span>
-                </Link>
-              ))}
-            </div>
+          {/* Categorias — scroll horizontal independente */}
+          <div className="flex gap-2 overflow-x-auto px-4 sm:px-6 lg:px-8 pt-3 pb-2" style={{ WebkitOverflowScrolling: "touch" }}>
+            {categories.map((cat) => (
+              <Link
+                key={cat.slug}
+                href={`/produtos/${cat.slug}`}
+                className={`shrink-0 px-3 py-1.5 rounded-full text-xs font-semibold transition-colors border
+                  ${cat.slug === categoria
+                    ? "bg-primary text-white border-primary"
+                    : "text-gray-600 border-gray-200 hover:border-primary hover:text-primary bg-white"
+                  }`}
+              >
+                {cat.name}
+                <span className="ml-1 opacity-60">({getCategoryCount(cat.slug)})</span>
+              </Link>
+            ))}
+          </div>
 
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between">
             {/* Pesquisa */}
             <form method="get" className="flex w-full sm:w-80 shrink-0">
               <div className="relative w-full">
