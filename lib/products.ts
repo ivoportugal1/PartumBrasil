@@ -22,6 +22,7 @@ export type SimpleProduct = {
   category: string;
   code: string;
   imageCode?: string;
+  brand?: string;
 };
 
 export const categories = [
@@ -34,23 +35,28 @@ export const categories = [
   { name: "Diversos", slug: "diversos" },
 ];
 
-export const allProducts: SimpleProduct[] = (rawProducts as { id: string; code: string; name: string; category: string; slug: string; imageCode?: string }[]).map((p) => ({
+export const allProducts: SimpleProduct[] = (rawProducts as { id: string; code: string; name: string; category: string; slug: string; imageCode?: string; brand?: string }[]).map((p) => ({
   id: p.id,
   slug: p.slug,
   name: p.name,
   category: p.category,
   code: p.code,
   imageCode: p.imageCode,
+  brand: p.brand,
 }));
 
 const ITEMS_PER_PAGE = 24;
 
-export function getProductsByCategory(slug: string, page = 1, search = ""): {
+export function getProductsByCategory(slug: string, page = 1, search = "", brand = ""): {
   products: SimpleProduct[];
   total: number;
   totalPages: number;
 } {
   let filtered = allProducts.filter((p) => p.category === slug);
+
+  if (brand.trim()) {
+    filtered = filtered.filter((p) => p.brand === brand);
+  }
 
   if (search.trim()) {
     const q = search.toLowerCase();
@@ -87,4 +93,16 @@ export function getCategoryName(slug: string): string {
 
 export function getCategoryCount(slug: string): number {
   return allProducts.filter((p) => p.category === slug).length;
+}
+
+export function getBrandsByCategory(slug: string): { name: string; count: number }[] {
+  const counts = new Map<string, number>();
+  for (const p of allProducts) {
+    if (p.category === slug && p.brand) {
+      counts.set(p.brand, (counts.get(p.brand) ?? 0) + 1);
+    }
+  }
+  return [...counts.entries()]
+    .map(([name, count]) => ({ name, count }))
+    .sort((a, b) => b.count - a.count || a.name.localeCompare(b.name));
 }
