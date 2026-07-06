@@ -122,7 +122,7 @@ export default async function ProductPage({
                   </p>
                   <AddToCartButton product={product as any} large />
                   <a
-                    href={`https://wa.me/5571303040341?text=Olá! Tenho interesse no produto: ${encodeURIComponent(product.name)}${product.code ? ` (Cód. ${product.code})` : ""}`}
+                    href={`https://wa.me/5571983070736?text=Olá! Tenho interesse no produto: ${encodeURIComponent(product.name)}${product.code ? ` (Cód. ${product.code})` : ""}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center justify-center gap-2 w-full py-3 border-2 border-green-500 text-green-600 hover:bg-green-50 font-semibold rounded-xl transition-colors text-sm"

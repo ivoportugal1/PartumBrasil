@@ -36,9 +36,6 @@ export default function ProductCard({ product }: { product: SimpleProduct }) {
           <span className={`text-xs font-semibold px-2 py-0.5 rounded-full ${categoryColors[product.category] ?? "bg-gray-100 text-gray-600"}`}>
             {product.category.charAt(0).toUpperCase() + product.category.slice(1)}
           </span>
-          {product.code && (
-            <span className="text-xs text-gray-400 font-mono truncate">{product.code}</span>
-          )}
         </div>
 
         <Link

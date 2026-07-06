@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { categories } from "@/lib/products";
 
 export default function Footer() {
   return (
@@ -30,7 +31,7 @@ export default function Footer() {
               </a>
               {/* WhatsApp */}
               <a
-                href="https://wa.me/5511999999999"
+                href="https://wa.me/5571983070736"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-9 h-9 bg-white/10 hover:bg-green-500 rounded-lg flex items-center justify-center transition-colors"
@@ -47,13 +48,13 @@ export default function Footer() {
           <div>
             <h3 className="font-bold text-sm uppercase tracking-wider mb-4">Produtos</h3>
             <ul className="space-y-2.5">
-              {["Luvas", "Óculos", "Couro", "Máscaras", "Capacetes", "Diversos"].map((item) => (
-                <li key={item}>
+              {categories.map((cat) => (
+                <li key={cat.slug}>
                   <Link
-                    href={`#${item.toLowerCase().replace("ó", "o")}`}
+                    href={`/produtos/${cat.slug}`}
                     className="text-white/60 hover:text-white text-sm transition-colors"
                   >
-                    {item}
+                    {cat.name}
                   </Link>
                 </li>
               ))}
@@ -117,7 +118,6 @@ export default function Footer() {
       <div className="border-t border-white/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-white/40">
           <p>© {new Date().getFullYear()} Partum Brasil. Todos os direitos reservados.</p>
-          <p>Desenvolvido com Next.js + Tailwind CSS</p>
         </div>
       </div>
     </footer>

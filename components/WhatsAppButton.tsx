@@ -1,7 +1,7 @@
 export default function WhatsAppButton() {
   return (
     <a
-      href="https://wa.me/5511999999999?text=Olá! Gostaria de solicitar um orçamento."
+      href="https://wa.me/5571983070736?text=Olá! Gostaria de solicitar um orçamento."
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Falar no WhatsApp"
