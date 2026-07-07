@@ -1,5 +1,5 @@
 import Link from "next/link";
-import type { SimpleProduct } from "@/lib/products";
+import { type SimpleProduct, getCategoryName } from "@/lib/products";
 import AddToCartButton from "./AddToCartButton";
 import ProductImage from "./ProductImage";
 
@@ -34,7 +34,7 @@ export default function ProductCard({ product }: { product: SimpleProduct }) {
       <div className="p-4 flex flex-col flex-1">
         <div className="flex items-center gap-2 mb-2">
           <span className={`text-xs font-semibold px-2 py-0.5 rounded-full ${categoryColors[product.category] ?? "bg-gray-100 text-gray-600"}`}>
-            {product.category.charAt(0).toUpperCase() + product.category.slice(1)}
+            {getCategoryName(product.category)}
           </span>
         </div>
 
