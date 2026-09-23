@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import CartIcon from "./CartIcon";
 
 const categories = [
@@ -26,6 +27,7 @@ export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [dropdown, setDropdown] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const pathname = usePathname();
 
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
@@ -91,9 +93,12 @@ export default function Header() {
                 <Link
                   key={item.label}
                   href={item.href}
-                  className="px-4 py-2 text-white/90 hover:text-white text-sm font-medium transition-colors rounded hover:bg-white/10"
+                  className="relative px-4 py-2 text-white/90 hover:text-white text-sm font-medium transition-colors rounded hover:bg-white/10"
                 >
                   {item.label}
+                  {pathname === item.href && (
+                    <span className="absolute left-4 right-4 -bottom-0.5 h-0.5 rounded-full bg-accent-light" />
+                  )}
                 </Link>
               )
             )}
@@ -104,8 +109,11 @@ export default function Header() {
             <CartIcon />
             <Link
               href="/#contato"
-              className="inline-flex items-center gap-2 bg-accent hover:bg-orange-600 text-white text-sm font-semibold px-5 py-2 rounded-lg transition-colors shadow"
+              className="inline-flex items-center gap-2 bg-accent hover:bg-primary-light text-white text-sm font-semibold px-5 py-2.5 rounded-lg transition-colors shadow"
             >
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M3 8l9 6 9-6M3 6h18v12H3z" />
+              </svg>
               Solicitar Orçamento
             </Link>
           </div>
@@ -163,7 +171,7 @@ export default function Header() {
             ))}
             <Link
               href="/#contato"
-              className="block mt-2 text-center bg-accent hover:bg-orange-600 text-white text-sm font-semibold px-5 py-2 rounded-lg transition-colors"
+              className="block mt-2 text-center bg-accent hover:bg-primary-light text-white text-sm font-semibold px-5 py-2 rounded-lg transition-colors"
               onClick={() => setMenuOpen(false)}
             >
               Solicitar Orçamento

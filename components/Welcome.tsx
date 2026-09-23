@@ -71,7 +71,7 @@ export default function Welcome() {
                     { value: "6", label: "Linhas de produto" },
                   ].map((s) => (
                     <div key={s.label}>
-                      <p className="text-3xl font-extrabold text-accent">{s.value}</p>
+                      <p className="text-3xl font-extrabold text-white">{s.value}</p>
                       <p className="text-white/60 text-sm mt-1">{s.label}</p>
                     </div>
                   ))}
