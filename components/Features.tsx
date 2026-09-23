@@ -80,7 +80,7 @@ export default function Features() {
           </h2>
           <p className="text-gray-500 mt-4 max-w-xl mx-auto">
             Comprometidos com a segurança e bem-estar dos trabalhadores
-            brasileiros há mais de duas décadas.
+            brasileiros desde 2016.
           </p>
         </div>
 

@@ -54,64 +54,67 @@ const stats = [
 
 export default function Hero() {
   return (
-    <section id="inicio" className="relative bg-primary-dark overflow-hidden">
-      {/* Imagem de fundo */}
-      <div className="absolute inset-0">
+    <section id="inicio" className="relative bg-primary-dark">
+      {/* Faixa da imagem: mesma proporcao da arte (2400x900), entao ela nunca e cortada */}
+      <div className="relative w-full min-h-[600px] lg:min-h-[660px] lg:aspect-[8/3] overflow-hidden">
         <Image
-          src="/hero-bg.jpg.png"
+          src="/hero.jpg"
           alt="Profissional com fardamento e EPI da Partum Brasil"
           fill
-          className="object-cover object-left"
+          sizes="100vw"
+          className="object-cover object-[45%_top] lg:object-left-top"
           priority
         />
-        <div className="absolute inset-0 bg-primary-dark/25" />
-        <div className="absolute inset-0 bg-gradient-to-r from-primary-dark/70 via-primary-dark/20 to-primary-dark/50 lg:from-transparent lg:via-primary-dark/30" />
-      </div>
+        <div className="absolute inset-0 bg-primary-dark/20" />
+        <div className="absolute inset-0 bg-gradient-to-r from-primary-dark/85 via-primary-dark/30 to-primary-dark/50 lg:from-transparent lg:via-primary-dark/25 lg:to-primary-dark/30" />
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-14 pb-32 lg:pt-16 lg:pb-32">
-        <div className="max-w-2xl lg:ml-[33%]">
-          <div className="flex items-center gap-3 mb-5">
-            <span className="block w-9 h-0.5 bg-accent-light rounded-full" />
-            <span className="text-white/70 text-xs sm:text-sm font-semibold uppercase tracking-[0.18em]">
-              Especialistas em EPI&apos;s desde 2015
-            </span>
-          </div>
+        <div className="absolute inset-0 flex items-center">
+          <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20 lg:pb-16">
+            <div className="max-w-2xl lg:ml-[28%]">
+              <div className="flex items-center gap-3 mb-5">
+                <span className="block w-9 h-0.5 bg-accent-light rounded-full" />
+                <span className="text-white/70 text-xs sm:text-sm font-semibold uppercase tracking-[0.18em]">
+                  Especialistas em EPI&apos;s desde 2016
+                </span>
+              </div>
 
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-[1.08] mb-6 drop-shadow-[0_2px_12px_rgba(0,0,0,0.35)]">
-            Segurança que{" "}
-            <span className="text-accent-light">protege</span>{" "}
-            quem faz acontecer
-          </h1>
+              <h1 className="text-4xl sm:text-5xl xl:text-6xl font-extrabold text-white leading-[1.08] mb-6 drop-shadow-[0_2px_12px_rgba(0,0,0,0.35)]">
+                Segurança que{" "}
+                <span className="text-accent-light">protege</span>{" "}
+                quem faz acontecer
+              </h1>
 
-          <p className="text-base sm:text-lg text-white/75 mb-9 leading-relaxed max-w-lg">
-            Equipamentos de proteção individual de alta qualidade para
-            indústrias, construtoras e empresas de todo o Brasil. Qualidade,
-            agilidade e atendimento especializado.
-          </p>
+              <p className="text-base sm:text-lg text-white/75 mb-8 leading-relaxed max-w-lg">
+                Equipamentos de proteção individual de alta qualidade para
+                indústrias, construtoras e empresas de todo o Brasil. Qualidade,
+                agilidade e atendimento especializado.
+              </p>
 
-          <div className="flex flex-col sm:flex-row gap-4">
-            <Link
-              href="#contato"
-              className="inline-flex items-center justify-center gap-2 bg-accent hover:bg-primary-light text-white font-semibold px-7 py-3.5 rounded-xl transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5"
-            >
-              Solicitar Orçamento
-              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
-            </Link>
-            <Link
-              href="#produtos"
-              className="inline-flex items-center justify-center gap-2 bg-primary-dark/40 hover:bg-primary-dark/70 border border-white/25 text-white font-semibold px-7 py-3.5 rounded-xl transition-all backdrop-blur-sm"
-            >
-              Ver Produtos
-            </Link>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Link
+                  href="#contato"
+                  className="inline-flex items-center justify-center gap-2 bg-accent hover:bg-primary-light text-white font-semibold px-7 py-3.5 rounded-xl transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5"
+                >
+                  Solicitar Orçamento
+                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </Link>
+                <Link
+                  href="#produtos"
+                  className="inline-flex items-center justify-center gap-2 bg-primary-dark/40 hover:bg-primary-dark/70 border border-white/25 text-white font-semibold px-7 py-3.5 rounded-xl transition-all backdrop-blur-sm"
+                >
+                  Ver Produtos
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
       {/* Barra de indicadores flutuante */}
-      <div className="relative px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto bg-primary-dark/75 backdrop-blur-md border border-white/10 border-b-0 rounded-t-3xl">
+      <div className="relative px-4 sm:px-6 lg:px-8 -mt-12 lg:-mt-14">
+        <div className="max-w-7xl mx-auto bg-primary-dark/80 backdrop-blur-md border border-white/10 border-b-0 rounded-t-3xl">
           <div className="grid grid-cols-2 lg:grid-cols-4 divide-x divide-white/10">
             {stats.map((s) => (
               <div key={s.label} className="flex items-center gap-3 px-5 sm:px-8 py-6">
