@@ -4,7 +4,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import ProductCard from "@/components/ProductCard";
-import { getProductsByCategory, getCategoryName, getCategoryCount, categories } from "@/lib/products";
+import { getProductsByCategory, getCategoryName, getCategoryCount, getBrandsByCategory, categories } from "@/lib/products";
 
 export function generateStaticParams() {
   return categories.map((c) => ({ categoria: c.slug }));
@@ -15,16 +15,30 @@ export default async function CategoryPage({
   searchParams,
 }: {
   params: Promise<{ categoria: string }>;
-  searchParams: Promise<{ q?: string; page?: string }>;
+  searchParams: Promise<{ q?: string; page?: string; marca?: string }>;
 }) {
   const { categoria } = await params;
-  const { q = "", page = "1" } = await searchParams;
+  const { q = "", page = "1", marca = "" } = await searchParams;
 
   if (!categories.find((c) => c.slug === categoria)) notFound();
 
   const currentPage = Math.max(1, parseInt(page));
-  const { products, total, totalPages } = getProductsByCategory(categoria, currentPage, q);
+  const { products, total, totalPages } = getProductsByCategory(categoria, currentPage, q, marca);
   const categoryName = getCategoryName(categoria);
+  const brands = getBrandsByCategory(categoria);
+
+  // monta a querystring preservando os filtros ativos
+  const qs = (extra: Record<string, string | number | undefined>) => {
+    const sp = new URLSearchParams();
+    if (q) sp.set("q", q);
+    if (marca) sp.set("marca", marca);
+    for (const [k, v] of Object.entries(extra)) {
+      if (v === undefined || v === "") sp.delete(k);
+      else sp.set(k, String(v));
+    }
+    const s = sp.toString();
+    return s ? `?${s}` : "";
+  };
 
   return (
     <>
@@ -36,6 +50,7 @@ export default async function CategoryPage({
             <h1 className="text-3xl font-extrabold">{categoryName}</h1>
             <p className="text-white/70 mt-1 text-sm">
               {total} produto{total !== 1 ? "s" : ""} encontrado{total !== 1 ? "s" : ""}
+              {marca && ` da marca ${marca}`}
               {q && ` para "${q}"`}
             </p>
           </div>
@@ -64,6 +79,7 @@ export default async function CategoryPage({
 
             {/* Pesquisa */}
             <form method="get" className="flex w-full sm:w-80 shrink-0">
+              {marca && <input type="hidden" name="marca" value={marca} />}
               <div className="relative w-full">
                 <svg className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -80,12 +96,49 @@ export default async function CategoryPage({
                 Buscar
               </button>
               {q && (
-                <Link href={`/produtos/${categoria}`} className="ml-2 px-3 py-2 text-sm text-gray-400 hover:text-gray-600 flex items-center">
+                <Link href={`/produtos/${categoria}${qs({ q: "" })}`} className="ml-2 px-3 py-2 text-sm text-gray-400 hover:text-gray-600 flex items-center">
                   ✕
                 </Link>
               )}
             </form>
           </div>
+
+          {/* Marcas */}
+          {brands.length > 0 && (
+            <div className="border-t border-gray-100">
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2.5 flex items-center gap-2">
+                <span className="text-[11px] font-semibold uppercase tracking-wider text-gray-400 shrink-0 hidden sm:block">
+                  Marca
+                </span>
+                <div className="flex gap-2 overflow-x-auto pb-1">
+                  <Link
+                    href={`/produtos/${categoria}${qs({ marca: "", page: "" })}`}
+                    className={`shrink-0 px-3 py-1 rounded-full text-xs font-medium transition-colors border
+                      ${!marca
+                        ? "bg-primary text-white border-primary"
+                        : "text-gray-600 border-gray-200 hover:border-primary hover:text-primary bg-white"
+                      }`}
+                  >
+                    Todas
+                  </Link>
+                  {brands.map((b) => (
+                    <Link
+                      key={b.name}
+                      href={`/produtos/${categoria}${qs({ marca: b.name, page: "" })}`}
+                      className={`shrink-0 px-3 py-1 rounded-full text-xs font-medium transition-colors border
+                        ${marca === b.name
+                          ? "bg-primary text-white border-primary"
+                          : "text-gray-600 border-gray-200 hover:border-primary hover:text-primary bg-white"
+                        }`}
+                    >
+                      {b.name}
+                      <span className="ml-1 opacity-60">({b.count})</span>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Grid */}
@@ -96,7 +149,7 @@ export default async function CategoryPage({
               <p className="text-lg font-bold text-gray-900 mb-2">Nenhum produto encontrado</p>
               <p className="text-gray-400 text-sm mb-6">Tente um termo diferente ou veja outra categoria</p>
               <Link href={`/produtos/${categoria}`} className="text-primary font-semibold hover:underline text-sm">
-                Limpar pesquisa
+                Limpar filtros
               </Link>
             </div>
           ) : (
@@ -112,7 +165,7 @@ export default async function CategoryPage({
                 <div className="flex items-center justify-center gap-2 mt-10">
                   {currentPage > 1 && (
                     <Link
-                      href={`/produtos/${categoria}?${q ? `q=${q}&` : ""}page=${currentPage - 1}`}
+                      href={`/produtos/${categoria}${qs({ page: currentPage - 1 })}`}
                       className="px-4 py-2 text-sm border border-gray-200 rounded-lg hover:border-primary hover:text-primary transition-colors bg-white"
                     >
                       ← Anterior
@@ -128,7 +181,7 @@ export default async function CategoryPage({
                     return (
                       <Link
                         key={p}
-                        href={`/produtos/${categoria}?${q ? `q=${q}&` : ""}page=${p}`}
+                        href={`/produtos/${categoria}${qs({ page: p })}`}
                         className={`w-9 h-9 flex items-center justify-center text-sm rounded-lg border transition-colors
                           ${p === currentPage
                             ? "bg-primary text-white border-primary"
@@ -142,7 +195,7 @@ export default async function CategoryPage({
 
                   {currentPage < totalPages && (
                     <Link
-                      href={`/produtos/${categoria}?${q ? `q=${q}&` : ""}page=${currentPage + 1}`}
+                      href={`/produtos/${categoria}${qs({ page: currentPage + 1 })}`}
                       className="px-4 py-2 text-sm border border-gray-200 rounded-lg hover:border-primary hover:text-primary transition-colors bg-white"
                     >
                       Próxima →

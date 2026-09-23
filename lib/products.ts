@@ -45,12 +45,78 @@ export const allProducts: SimpleProduct[] = (rawProducts as { id: string; code: 
 
 const ITEMS_PER_PAGE = 24;
 
-export function getProductsByCategory(slug: string, page = 1, search = ""): {
+/* ---------------- Marcas ----------------
+   O catálogo não tem campo de marca, ela vem escrita dentro do nome do
+   produto. A lista abaixo é casada com o nome (palavra inteira, sem acento)
+   e o resultado fica em cache logo no carregamento do módulo. */
+const BRAND_LIST = [
+  "AgroIndustria", "Air Safety", "Athenas", "Ayrton", "Bellga", "Bracol",
+  "Brasil", "Camper", "Carbografite", "Cartom", "Crival", "Danny",
+  "Delta Plus", "Doptex", "Dystray", "Estival", "Extremo Sul",
+  "Ferreira Mold", "Fortline", "Fujiwara", "Gedore", "Idol", "Innpro",
+  "Kadesh", "Kala", "Kalipso", "Ledan", "Libus", "Maicol", "Mapa",
+  "Marluvas", "MSA", "Mucambo", "Norton", "Nove54", "Nutriex", "Partum",
+  "Plastcor", "Promat", "Protecap", "Rhino", "Soft Works", "Solida",
+  "Steelflex", "Super Safety", "Thompson", "Tramontina", "Valeplast",
+  "Vicsa", "Vicunha", "Volk", "Vonder", "Vulcaflex", "Worker", "Zanel",
+  "3M",
+];
+
+const deburr = (s: string) =>
+  s.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
+
+const BRAND_MATCHERS = BRAND_LIST
+  // marcas com nome mais longo primeiro, pra "Super Safety" ganhar de "Safety"
+  .slice()
+  .sort((a, b) => b.length - a.length)
+  .map((brand) => ({
+    brand,
+    regex: new RegExp(
+      `(^|[^a-z0-9])${deburr(brand).replace(/\s+/g, "\\s+")}([^a-z0-9]|$)`
+    ),
+  }));
+
+function detectBrand(name: string): string | null {
+  const n = deburr(name);
+  for (const { brand, regex } of BRAND_MATCHERS) {
+    if (regex.test(n)) return brand;
+  }
+  return null;
+}
+
+const brandById = new Map<string, string>();
+for (const p of allProducts) {
+  const b = detectBrand(p.name);
+  if (b) brandById.set(p.id, b);
+}
+
+export function getProductBrand(product: SimpleProduct): string | null {
+  return brandById.get(product.id) ?? null;
+}
+
+export function getBrandsByCategory(slug: string): { name: string; count: number }[] {
+  const counts = new Map<string, number>();
+  for (const p of allProducts) {
+    if (p.category !== slug) continue;
+    const b = brandById.get(p.id);
+    if (!b) continue;
+    counts.set(b, (counts.get(b) ?? 0) + 1);
+  }
+  return [...counts.entries()]
+    .map(([name, count]) => ({ name, count }))
+    .sort((a, b) => b.count - a.count || a.name.localeCompare(b.name));
+}
+
+export function getProductsByCategory(slug: string, page = 1, search = "", brand = ""): {
   products: SimpleProduct[];
   total: number;
   totalPages: number;
 } {
   let filtered = allProducts.filter((p) => p.category === slug);
+
+  if (brand.trim()) {
+    filtered = filtered.filter((p) => brandById.get(p.id) === brand);
+  }
 
   if (search.trim()) {
     const q = search.toLowerCase();

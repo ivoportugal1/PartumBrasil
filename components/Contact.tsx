@@ -73,7 +73,7 @@ export default function Contact() {
                     </svg>
                   ),
                   label: "E-mail",
-                  value: "vendas05@partumbrasil.com.br",
+                  value: "vendas04@partumbrasil.com.br",
                 },
                 {
                   icon: (
