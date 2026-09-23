@@ -56,7 +56,7 @@ export default function Hero() {
   return (
     <section id="inicio" className="relative bg-primary-dark">
       {/* Faixa da imagem: mesma proporcao da arte (2400x900), entao ela nunca e cortada */}
-      <div className="relative w-full min-h-[600px] lg:min-h-[660px] lg:aspect-[8/3] overflow-hidden">
+      <div className="relative w-full min-h-[580px] lg:min-h-[600px] lg:aspect-[240/103] overflow-hidden">
         <Image
           src="/hero.jpg"
           alt="Profissional com fardamento e EPI da Partum Brasil"
@@ -70,7 +70,7 @@ export default function Hero() {
 
         <div className="absolute inset-0 flex items-center">
           <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20 lg:pb-16">
-            <div className="max-w-2xl lg:ml-[28%]">
+            <div className="max-w-2xl lg:ml-[40%]">
               <div className="flex items-center gap-3 mb-5">
                 <span className="block w-9 h-0.5 bg-accent-light rounded-full" />
                 <span className="text-white/70 text-xs sm:text-sm font-semibold uppercase tracking-[0.18em]">
@@ -113,7 +113,7 @@ export default function Hero() {
       </div>
 
       {/* Barra de indicadores flutuante */}
-      <div className="relative px-4 sm:px-6 lg:px-8 -mt-12 lg:-mt-14">
+      <div className="relative px-4 sm:px-6 lg:px-8 -mt-12 lg:-mt-16">
         <div className="max-w-7xl mx-auto bg-primary-dark/80 backdrop-blur-md border border-white/10 border-b-0 rounded-t-3xl">
           <div className="grid grid-cols-2 lg:grid-cols-4 divide-x divide-white/10">
             {stats.map((s) => (
