@@ -22,6 +22,7 @@ export type SimpleProduct = {
   category: string;
   code: string;
   imageCode?: string;
+  brand?: string;
 };
 
 export const categories = [
@@ -34,13 +35,14 @@ export const categories = [
   { name: "Diversos", slug: "diversos" },
 ];
 
-export const allProducts: SimpleProduct[] = (rawProducts as { id: string; code: string; name: string; category: string; slug: string; imageCode?: string }[]).map((p) => ({
+export const allProducts: SimpleProduct[] = (rawProducts as { id: string; code: string; name: string; category: string; slug: string; imageCode?: string; brand?: string }[]).map((p) => ({
   id: p.id,
   slug: p.slug,
   name: p.name,
   category: p.category,
   code: p.code,
   imageCode: p.imageCode,
+  brand: p.brand,
 }));
 
 const ITEMS_PER_PAGE = 24;
@@ -84,9 +86,11 @@ function detectBrand(name: string): string | null {
   return null;
 }
 
+/* O catálogo já traz a marca em boa parte dos itens. Quando vier vazia,
+   caímos na detecção pelo nome. */
 const brandById = new Map<string, string>();
 for (const p of allProducts) {
-  const b = detectBrand(p.name);
+  const b = p.brand?.trim() || detectBrand(p.name);
   if (b) brandById.set(p.id, b);
 }
 

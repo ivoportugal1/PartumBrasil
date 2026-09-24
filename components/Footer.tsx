@@ -9,7 +9,7 @@ export default function Footer() {
           {/* Brand */}
           <div className="lg:col-span-1">
             <div className="mb-4">
-              <Image src="/logopartum-clean.png" alt="Partum Brasil" width={220} height={80} className="h-10 w-auto" />
+              <Image src="/logopartum-clean.png" alt="Partum Brasil" width={3014} height={1574} className="h-16 w-auto" />
             </div>
             <p className="text-white/60 text-sm leading-relaxed">
               Especializada em EPIs de alta qualidade para indústrias e
