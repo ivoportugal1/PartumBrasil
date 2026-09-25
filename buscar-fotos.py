@@ -43,7 +43,16 @@ PADROES = {
     ],
 }
 
-EXT_VALIDAS = {"image/jpeg": ".jpg", "image/png": ".png", "image/webp": ".webp"}
+EXT_VALIDAS = {"image/jpeg": ".jpg", "image/jpg": ".jpg", "image/pjpeg": ".jpg",
+               "image/jpe": ".jpg", "image/png": ".png", "image/x-png": ".png",
+               "image/webp": ".webp", "image/gif": ".gif"}
+
+def ext_da_url(url):
+    m = re.search(r"\.(jpe?g|png|webp|gif)(?:[?#]|$)", url, re.I)
+    if not m:
+        return None
+    e = m.group(1).lower()
+    return ".jpg" if e in ("jpg", "jpeg") else "." + e
 
 # Chutes de endereco de imagem por marca, usados pelo modo --descobrir.
 # {code} e o codigo do produto no catalogo da Partum.
@@ -149,7 +158,7 @@ def baixar(url, timeout=20, detalhe=False):
             if r.status != 200:
                 return (None, f"HTTP {r.status}") if detalhe else None
             tipo = (r.headers.get("Content-Type") or "").split(";")[0].strip().lower()
-            ext = EXT_VALIDAS.get(tipo)
+            ext = EXT_VALIDAS.get(tipo) or ext_da_url(url)
             if not ext:
                 return (None, f"tipo {tipo or '?'}") if detalhe else None
             dados = r.read()
