@@ -1,0 +1,173 @@
+# Lote 2 - CA ; foto  (86 fotos cobrem 532 produtos)
+# Idol - 36 produto(s)
+42742;https://frontiereepi.com.br/wp-content/uploads/2024/10/Botina-Nobuck-Cafe-Bidensidade-com-Cadarco-e-Bico-de-Pvc-IDOL-CA-42742.jpg
+# Bracol - 36 produto(s)
+37456;https://cdn.awsli.com.br/800x800/2698/2698950/produto/333025997/gr-00764-1-bota-bracol-preta-pvc-cano-medio-ref82bpc600-ca37456-w35rdoqb2u.jpg
+# Bellga - 18 produto(s)
+45839;https://bellga.com.br/wp-content/uploads/2021/06/TVL-NOBUCK-PRETO.jpg
+# MSA - 13 produto(s)
+498;https://images.tcdn.com.br/img/img_prod/761993/capacete_msa_v_gard_aba_frontal_ca_498_c_catraca_e_jugular_557_1_cf07b56f977034b45d882d778ef48b72.png
+# Cartom - 12 produto(s)
+39931;https://cdn.awsli.com.br/800x800/2698/2698950/produto/333050950/gr-00697-1-botina-lider-elastico-l152cptpa-preta-bi-bcomposite-palmilha-anti-per-56plkkm3eo.jpg
+# Kadesh - 11 produto(s)
+48108;https://safetytrab.com.br/wp-content/uploads/2026/06/botina-seguranca-bico-pvc-combat-kadesh.webp
+# Bellga - 11 produto(s)
+46760;https://bellga.com.br/wp-content/uploads/2021/06/TSA-RELAX.jpg
+# Kadesh - 11 produto(s)
+46269;https://cdn.awsli.com.br/800x800/2698/2698950/produto/333052895/gr-00509-1-botina-kadesh-am-el45czpvc21-adventure-cinza-bpvc-ca46269-7re6cv5y7a.jpg
+# Bracol - 11 produto(s)
+37750;https://cdn.awsli.com.br/800x800/2698/2698950/produto/333026177/80000154-85bpl200-preto-1-lzwecqce36.JPG
+# Worker - 11 produto(s)
+37154;https://cdn.awsli.com.br/800x800/2698/2698950/produto/333029504/bota_pvc_impermeavel_cano_curto_workflex_preta_com_forro_ca_37154_7_1_2020121402-kn8fs8duh2.jpg
+# Cartom - 11 produto(s)
+17137;https://cdn.awsli.com.br/800x800/2698/2698950/produto/333053374/gr-00463-1-botina-cartom-010-elastico-raspa-preto-mono-bpvc-ca17137-tvkonjy038.JPG
+# Kadesh - 11 produto(s)
+17017;https://cdn.awsli.com.br/800x800/2698/2698950/produto/333054723/gr-00392-1-botina-imbiseg-cadarco-preta-3-gomos-sem-bico-ca-17017-ref-003gsb11-xose4z13kp.JPG
+# Kadesh - 10 produto(s)
+47610;https://images.tcdn.com.br/img/img_prod/1191177/coturno_eletricista_nobuck_estrada_3g_b_composite_e_palm_anti_perfuro_ca_47610_825_1_bbd333f0e072016da97c47fea03d056c.jpg
+# Bellga - 10 produto(s)
+44696;https://bellga.com.br/wp-content/uploads/2021/06/TSA-RELAX.jpg
+# Cartom - 10 produto(s)
+41335;https://cdn.awsli.com.br/800x800/2698/2698950/produto/333050928/botina-de-amarrar-nobuck-cor-cafe-3-gomos-tp092-sem-biqueira-cartom-gzzqfu9h5k.jpg
+# Vulcaflex - 9 produto(s)
+43377;https://cdn.awsli.com.br/800x800/2698/2698950/produto/333056991/gr-00018-1-botina-vulcaflex-10vb48-bp-bidensidade-e-bico-pvc-ca-43377-vp4xq0byfb.jpeg
+# Kadesh - 9 produto(s)
+40881;https://cdn.awsli.com.br/800x800/2698/2698950/produto/333052882/gr-00511-1-botina-kadesh-el-microfibra-bico-composite-el3500cpt21-ca40881-omiyqe1sgo.JPG
+# Cartom - 9 produto(s)
+38362;https://images.tcdn.com.br/img/img_prod/1191177/botina_premium_elastico_lider_l106_bidensidade_couro_hidrofugado_liso_bico_pvc_ca_38362_375_1_a2b233b667dc3baa753a0c815d37b7c4.png
+# Bracol - 9 produto(s)
+37455;https://safetytrab.com.br/wp-content/uploads/2024/03/bota-impermeavel-preta-acqualev-bracol-1.webp
+# Idol - 9 produto(s)
+36515;https://frontiereepi.com.br/wp-content/uploads/2024/11/Botina-Bidensidade-Elastico-e-Reforco-no-Metatarso-Bico-Composite-IDOL-CA-36515.jpg
+# Calfor - 9 produto(s)
+35400;https://cdn.awsli.com.br/800x800/2698/2698950/produto/333029223/gr-00312-1-bota-de-pvc-calfor-modelo-evolution-preta-com-biqueira-e-palmilha-ca3-ql7wgfuozo.jpg
+# Kala - 9 produto(s)
+17015;https://cdn.awsli.com.br/800x800/2698/2698950/produto/333055094/gr-00248-1-botina-imbiseg-elastico-monodensidade-bico-pvc-ca-17015-s05o0v0e1k.jpg
+# Marluvas - 8 produto(s)
+40793;https://cdn.awsli.com.br/800x800/2698/2698950/produto/333029635/gr-00178-1-bota-marluvas-pvc-cano-longo-com-forro-palmilha-aco-ca-40793-gw8eq5l19u.jpg
+# Libus - 8 produto(s)
+36099;https://cdn.awsli.com.br/800x800/2698/2698950/produto/403213882/9c2ade2ff827bf980df54d9c97e905fb-62v8qm1xl1.jpg
+# Bracol - 8 produto(s)
+35223;https://cdn.awsli.com.br/800x800/2698/2698950/produto/333030068/12794-1-bota-bracol-80bpl200-pvc-preta-n35-cano-longo-com-bico-com-forro-ca-3522-jl193u29ue.jpg
+# Bracol - 8 produto(s)
+34671;https://cdn.awsli.com.br/800x800/2698/2698950/produto/333026285/40724156-91bpul100-preto-verde-2-5c8i6ivyej.JPG
+# Camper - 8 produto(s)
+34414;https://cdn.awsli.com.br/800x800/2698/2698950/produto/332629978/08715-1-suspencao-plastica-de-pino-camper-ca34414-2bovsnom7o.jpg
+# Cartom - 8 produto(s)
+29391;https://cdn.awsli.com.br/800x800/2698/2698950/produto/333053514/gr-00450-3-botina-lider-elastico-l106pvc-preta-bi-bpvc--ca-29391-05oqfiz94x.jpg
+# Kadesh - 8 produto(s)
+17010;https://cdn.awsli.com.br/800x800/2698/2698950/produto/333052915/gr-00506-1-botina-kadesh-el-impacto-bpvc-eletricista-el2500pvc21-ca17010-9oipu1ugus.jpg
+# Calfor - 7 produto(s)
+46877;https://cdn.awsli.com.br/800x800/2698/2698950/produto/333026398/composite-preta1-jltyzbfcr9.png
+# Fujiwara - 7 produto(s)
+42167;https://images.tcdn.com.br/img/img_prod/1191177/botina_de_couro_hess_bico_composite_fujiwara_flex_ca_42165_4065hess1600fx_235_1_d5b134baaa687c7dbf2a65ac8c1f0b29.jpg
+# Innpro - 7 produto(s)
+36026;https://frontiereepi.com.br/wp-content/uploads/2024/11/Bota-de-PVC-Work-Preta-Antiderrapante-Impermeavel-Cano-Longo-–-Innpro-CA-36026-01.jpg
+# Kadesh - 6 produto(s)
+42149;https://cdn.awsli.com.br/800x800/2698/2698950/produto/333026706/6033p-lateral-kadesh-equipamentos-profissionais-5cworrczj7.jpg
+# Innpro - 6 produto(s)
+36025;https://frontiereepi.com.br/wp-content/uploads/2025/04/Bota-de-Pvc-Work-Preta-Sem-Forro-Cano-Medio-28cm-Innpro-CA-36025.jpg
+# Kadesh - 5 produto(s)
+43975;https://cdn.awsli.com.br/800x800/2698/2698950/produto/333029406/gr-00257-1-bota-termica-kadesh-microfibra-bico-pvc-branco-ca-43975-mo88d2bnf5.jpg
+# Vulcaflex - 5 produto(s)
+42291;https://cdn.awsli.com.br/800x800/2698/2698950/produto/333029539/gr-00238-1-bota-pvc-vulcaflex-110vflexf-preta-cano-medio-com-forro-ca-42291-5zhbka64by.jpg
+# Bracol - 5 produto(s)
+40872;https://cdn.awsli.com.br/800x800/2698/2698950/produto/333050850/gr-00759-1-botina-bracol-new-horizon-amazonas-4064mbag4460lh-bpvc-ca40872-1jf89zokn8.jpg
+# Calfor - 5 produto(s)
+40399;https://cdn.awsli.com.br/800x800/2698/2698950/produto/333056836/gr-00092-1-botina-calfor-evolution-pvc-quimica-cano-longo-39cm-ca-40399-u5kjpmmhx3.jpg
+# Cartom - 5 produto(s)
+32169;https://cdn.awsli.com.br/800x800/2698/2698950/produto/382476210/f6703f914081579c033835d16a772f76-glgliq6wh0.jpg
+# Kalipso - 5 produto(s)
+15272;https://cdn.awsli.com.br/800x800/2698/2698950/produto/332712593/gr-00648-1-luva-kalipso-pu-preta--ca15272-b5mbhf4wu5.jpg
+# Cartom - 5 produto(s)
+15079;https://cdn.awsli.com.br/800x800/2698/2698950/produto/333053480/gr-00455-1-botina-cartom-elastico-raspa-preto-bidensidade-bico-aco-ca-15079-aewo7snyjy.jpg
+# Air Safety - 4 produto(s)
+5758;https://images.tcdn.com.br/img/img_prod/1191177/mascara_facial_full_face_absolute_ca_5758_airsaf_1_20260623090310_be107120fd2a.jpg
+# Fujiwara - 4 produto(s)
+42165;https://cdn.awsli.com.br/800x800/2698/2698950/produto/333051042/gr-00676-1-botina-bracol-elastico-bcomp-4045bels1600ll40724052-n41-ca42165-vxyfufow32.jpg
+# Super Safety - 4 produto(s)
+41296;https://cdn.awsli.com.br/800x800/2698/2698950/produto/332712682/gr-00647-1-luva-nitrilica-super-safety-safe-bio-azul-ca-41296-8g46ks2di9.jpg
+# Volk - 4 produto(s)
+38260;https://safetytrab.com.br/wp-content/uploads/2019/10/luva-therma-volk.webp
+# Kalipso - 4 produto(s)
+38090;https://cdn.awsli.com.br/800x800/2698/2698950/produto/332712218/gr-00845-1-luva-kalipso-latex-ligth-amarela-ca-38090-wobiv2m5cr.jpg
+# Super Safety - 4 produto(s)
+37871;https://cdn.awsli.com.br/800x800/2698/2698950/produto/379169423/a595c9499fa7a9e66d330f35014c2c9a-34tc29rjm2.jpg
+# Volk - 4 produto(s)
+30916;https://cdn.awsli.com.br/800x800/2698/2698950/produto/332817813/gr-00048-1-luva-volk-tatil-black-pu-ca-30916-w3v24fpybs.jpg
+# Danny - 4 produto(s)
+29014;https://cdn.awsli.com.br/800x800/2698/2698950/produto/332712294/gr-00786-1-luva-danny-flextatil-palma-pu-da-12100-branca-ca29014-eonjepnm0k.jpg
+# Volk - 4 produto(s)
+16314;https://cdn.awsli.com.br/800x800/2698/2698950/produto/379982821/820d9d763b701a25ff50dd065acdb669-dnzzy7odut.jpg
+# Yeling - 4 produto(s)
+14628;https://cdn.awsli.com.br/800x800/2698/2698950/produto/332818312/00076-1-luva-yeling-1670b-pu-branco-09-ca14628-ihtt97aazx.jpg
+# Kalipso - 3 produto(s)
+49319;https://images.tcdn.com.br/img/img_prod/1191177/culos_kronos_kalipso_ca_49319_1_20260130100744_07d85506e4bb.jpg
+# Kalipso - 3 produto(s)
+45873;https://images.tcdn.com.br/img/img_prod/1191177/culos_cancun_kalipso_ca_45873_1_20260130092051_97699bb356a3.jpg
+# Bracol - 3 produto(s)
+43017;https://cdn.awsli.com.br/800x800/2698/2698950/produto/333026187/gr-00765-1-bota-bracol-branca-pvc-cano-medio-cforro-ref85bpc600ft-ca43017-krz7fnsrgy.jpg
+# 3M - 3 produto(s)
+4115;https://images.tcdn.com.br/img/img_prod/1191177/cartucho_6003_vap_gases_acidos_ca4115_3m_1051_1_623def828bdf03ee071f4b17941fd1ff.jpg
+# Volk - 3 produto(s)
+39183;https://cdn.awsli.com.br/800x800/2698/2698950/produto/332704216/gr-00395-1-macacao-tnt-volk-branco-ca-39183-3v326n4tsc.jpg
+# Volk - 3 produto(s)
+39182;https://safetytrab.com.br/wp-content/uploads/2024/09/macacao-volk-covertech-200.webp
+# Athenas - 3 produto(s)
+37977;https://frontiereepi.com.br/wp-content/uploads/2024/10/Cinto-Paraquedista-Abdominal-AT-7015-Athos-Confort-3-Pontos-Athenas-CA-37977.jpg
+# Volk - 3 produto(s)
+37900;https://cdn.awsli.com.br/800x800/2698/2698950/produto/332817793/gr-00049-1-luva-volk-latex-com-neoprene-bicolor-slim-ca-37900-nb4s3uyrj7.jpg
+# Camper - 3 produto(s)
+36318;https://cdn.awsli.com.br/800x800/2698/2698950/produto/332666040/14296-1-suporte-universal-e-lente-camper-ca36318-uxo728gwwp.JPG
+# Marluvas - 3 produto(s)
+32817;https://cdn.awsli.com.br/800x800/2698/2698950/produto/333000574/gr-00027-1-sapato-marluvas-50f61-feminino-sola-bidensidade-ca-32817-7oj8luhm1j.JPG
+# 3M - 3 produto(s)
+29638;https://frontiereepi.com.br/wp-content/uploads/2025/04/Capacete-3M-H-700-Amarelo-Classe-B-com-Ajuste-Catraca-CA-29638-1.jpg
+# 3M - 3 produto(s)
+12011;https://cdn.awsli.com.br/800x800/2698/2698950/produto/332680795/gr-00162-2-mascara-3m-semi-facial-silicone-serie-7000-ca-12011-07b3u4sbj0.jpg
+# Kalipso - 3 produto(s)
+11769;https://cdn.awsli.com.br/800x800/2698/2698950/produto/332806039/galeria-produto-05122024-161539-77802-b4c9qxdwc7.jpg
+# 3M - 2 produto(s)
+5745;https://cdn.awsli.com.br/800x800/2698/2698950/produto/332647471/03981-1-protetor-3m-auditivo-pomp-plus-cordao-sintetico-18db-ca-5745-hb004680565-jdicx8e3nm.jpg
+# 3M - 2 produto(s)
+5674;https://cdn.awsli.com.br/800x800/2698/2698950/produto/354249543/100-sfj46fmebv.png
+# Vulcaflex - 2 produto(s)
+43337;https://cdn.awsli.com.br/800x800/2698/2698950/produto/332998832/gr-00328-1-sapato-marluvas-10vs48-a-ca-43337-fd8rww4bbd.jpg
+# Vulcaflex - 2 produto(s)
+43334;https://cdn.awsli.com.br/800x800/2698/2698950/produto/333000511/gr-00031-1-sapato-marluvas-vulcaflex-10vt48-bp-bico-de-pvc-ca-43334-ycy67t7tja.jpg
+# Marluvas - 2 produto(s)
+41419;https://cdn.awsli.com.br/800x800/2698/2698950/produto/333056721/01-95b19-bp-700397-v6vee7ccvg.png
+# Volk - 2 produto(s)
+38932;https://cdn.awsli.com.br/800x800/2698/2698950/produto/332801075/gr-00383-1-luva-volk-nitril-wave-ca-38932-olyjbhnvf0.jpg
+# Volk - 2 produto(s)
+38310;https://cdn.awsli.com.br/800x800/2698/2698950/produto/332810209/gr-00114-1-luva-volk-slim-multiuso-amarela-ca-38310-ju5qadr70s.jpg
+# Volk - 2 produto(s)
+37815;https://cdn.awsli.com.br/800x800/2698/2698950/produto/332805777/gr-00379-1-luva-volk-latex-reforcao-ca-37815-jpg3hhyogn.jpg
+# Volk - 2 produto(s)
+37168;https://cdn.awsli.com.br/800x800/2698/2698950/produto/332809922/gr-00145-1-luva-volk-microfoam-34-ca-37168-tk8xdr7xfa.jpg
+# Volk - 2 produto(s)
+36606;https://cdn.awsli.com.br/800x800/2698/2698950/produto/332801087/gr-00382-1-luva-volk-cut-oil-ca-36606-2bzhnfmdkc.jpg
+# Libus - 2 produto(s)
+35765;https://cdn.awsli.com.br/800x800/2698/2698950/produto/332671590/06316-1-oculos-jaguarargon-cinza-sae-ca35765-libus-4ef6vz0g60.jpg
+# Libus - 2 produto(s)
+35746;https://cdn.awsli.com.br/800x800/2698/2698950/produto/332671443/gr-00416-1-oculos-libus-neon-plus-transparente-ca-35746-qjzqe3rykv.jpg
+# Kalipso - 2 produto(s)
+35157;https://cdn.awsli.com.br/800x800/2698/2698950/produto/332671741/06417-1-oculos-kalipso-veneza-azul-espelhado-ca35157-dzqcuzwmz4.jpg
+# Kalipso - 2 produto(s)
+34491;https://cdn.awsli.com.br/800x800/2698/2698950/produto/375927964/kit-5-xhxwyuixm7.png
+# Worker - 2 produto(s)
+33680;https://cdn.awsli.com.br/800x800/2698/2698950/produto/332671671/12040-1-oculos-de-sobrepor-incolor-wk4-ca33680----ferragens-negrao--xsmz96gq48.jpg
+# Super Safety - 2 produto(s)
+32036;https://cdn.awsli.com.br/800x800/2698/2698950/produto/332799566/gr-00591-1-luva-1008f-anti-corte-nivel-5-ca32036-0b566qlnll.JPG
+# Super Safety - 2 produto(s)
+32034;https://cdn.awsli.com.br/800x800/2698/2698950/produto/376108140/kit-3-4qp4evafcj.png
+# Volk - 2 produto(s)
+25280;https://cdn.awsli.com.br/800x800/2698/2698950/produto/332805979/gr-00329-1-luva-volk-nitril-full-ca-25280-qdercfnokk.jpg
+# Mucambo - 2 produto(s)
+20074;https://cdn.awsli.com.br/800x800/2698/2698950/produto/332805764/01762-1-luva-mucambo-ultravinil-pro36--pvc-palma-aspera-36cm-09-ca20074-p130wpg4bt.jpg
+# Volk - 2 produto(s)
+16313;https://cdn.awsli.com.br/800x800/2698/2698950/produto/332810034/gr-00134-1-luva-volk-nitrilica-verde-com-forro-ca-16313-bmbs9bmhq7.jpg
+# Kalipso - 2 produto(s)
+15685;https://cdn.awsli.com.br/800x800/2698/2698950/produto/332806132/gr-00317-1-luva-neoprex-latex-natural-kalipso-ca-15685-p4gjjo8mkm.jpg
+# Ansell - 2 produto(s)
+12598;https://cdn.awsli.com.br/800x800/2698/2698950/produto/332712880/gr-00608-1-luva-ansell-solvex-37-185-ca12598-lrq3t5py5b.jpg

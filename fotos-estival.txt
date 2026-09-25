@@ -1,0 +1,8 @@
+# Estival - CA ; endereco da foto oficial (loja da propria Estival)
+# 6 fotos cobrem 68 produtos do catalogo
+44591;https://cdn.shoppub.io/cdn-cgi/image/w=1000,h=1000,q=80,f=auto/estival/media/uploads/produtos/foto/b7c765a70ff29wo1003-mr-1.jpg
+44592;https://cdn.shoppub.io/cdn-cgi/image/w=1000,h=1000,q=80,f=auto/estival/media/uploads/produtos/foto/hdfrzspl/en1002-ptcz-1.png
+44558;https://cdn.shoppub.io/cdn-cgi/image/w=1000,h=1000,q=80,f=auto/estival/media/uploads/produtos/foto/hratpufi/en10071s2ptvm_pu-1.png
+40376;https://cdn.shoppub.io/cdn-cgi/image/w=1000,h=1000,q=80,f=auto/estival/media/uploads/produtos/foto/xitltbqo/ad9000-dksh-1b.jpg
+47843;https://cdn.shoppub.io/cdn-cgi/image/w=1000,h=1000,q=80,f=auto/estival/media/uploads/produtos/foto/mhvbqfpr/hb70001s1ab_pu.png
+31090;https://cdn.shoppub.io/cdn-cgi/image/w=1000,h=1000,q=80,f=auto/estival/media/uploads/produtos/foto/ajiilrpk/wo1002-microfibra-elet-1.png
