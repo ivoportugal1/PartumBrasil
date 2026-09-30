@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Image from "next/image";
 import { getAllBrands, brandSlug } from "@/lib/products";
 
 /* Marcas destacadas na home, na ordem em que aparecem.
@@ -57,12 +56,11 @@ export default function Parceiros() {
               >
                 <div className="h-[42px] flex items-center justify-center">
                   {logo ? (
-                    <Image
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
                       src={logo}
                       alt={nome}
-                      width={220}
-                      height={70}
-                      unoptimized
+                      loading="lazy"
                       className="max-h-[42px] w-auto max-w-[140px] object-contain"
                     />
                   ) : (

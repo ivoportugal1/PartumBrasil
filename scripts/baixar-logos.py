@@ -17,7 +17,7 @@ UA = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.3
                     "(KHTML, like Gecko) Chrome/125.0 Safari/537.36"}
 
 LOGOS = {
-    "kalipso.svg":      "https://kalipso.com.br/img/logo.svg",
+    "kalipso.svg":      "https://kalipso.com.br/img/logo-kalipso-h.svg",
     "kadesh.png":       "https://kadeshepi.com.br/wp-content/uploads/2026/04/logo_kadesh.png",
     "volk.png":         "https://www.volkdobrasil.com.br/wp-content/uploads/2024/07/logo-branca.png",
     "3m.png":           "https://logodownload.org/wp-content/uploads/2015/12/3m-logo-11.png",
