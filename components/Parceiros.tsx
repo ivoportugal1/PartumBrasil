@@ -9,16 +9,17 @@ const existe = (arquivo: string | null) =>
 
 /* Marcas destacadas na home, na ordem em que aparecem.
    logo = arquivo em public/marcas/. Marca sem logo aparece
-   como card de texto, funcionando igual. */
-const DESTAQUE: { nome: string; logo: string | null }[] = [
+   como card de texto, funcionando igual.
+   escuro = logo branco (só existe essa versão): ganha uma placa azul-marinho atrás. */
+const DESTAQUE: { nome: string; logo: string | null; escuro?: boolean }[] = [
   { nome: "Kalipso", logo: "/marcas/kalipso.svg" },
   { nome: "Kadesh", logo: "/marcas/kadesh.png" },
-  { nome: "Volk", logo: null },
+  { nome: "Volk", logo: "/marcas/volk.png", escuro: true },
   { nome: "3M", logo: "/marcas/3m.png" },
   { nome: "MSA", logo: "/marcas/msa.png" },
   { nome: "Rhino", logo: "/marcas/rhino.png" },
   { nome: "Camper", logo: "/marcas/camper.svg" },
-  { nome: "Ultra Master", logo: null },
+  { nome: "Ultra Master", logo: "/marcas/ultra-master.png", escuro: true },
   { nome: "Steelflex", logo: "/marcas/steelflex.png" },
 ];
 
@@ -52,7 +53,7 @@ export default function Parceiros() {
         </p>
 
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3.5">
-          {DESTAQUE.map(({ nome, logo: arquivo }) => {
+          {DESTAQUE.map(({ nome, logo: arquivo, escuro }) => {
             const n = contagem.get(nome) ?? 0;
             const logo = existe(arquivo) ? arquivo : null;
             return (
@@ -61,14 +62,20 @@ export default function Parceiros() {
                 href={`/marcas/${brandSlug(nome)}`}
                 className="group flex flex-col items-center justify-center gap-3 rounded-2xl bg-white px-4 py-7 shadow-sm ring-1 ring-black/5 transition-all duration-200 hover:-translate-y-1 hover:shadow-xl hover:ring-accent/40"
               >
-                <div className="h-[42px] flex items-center justify-center">
+                <div
+                  className={
+                    logo && escuro
+                      ? "h-[64px] w-full flex items-center justify-center rounded-xl px-4 shadow-inner ring-1 ring-white/10 bg-[radial-gradient(120px_70px_at_20%_0%,rgba(91,155,245,0.35),transparent_70%),linear-gradient(135deg,#0d2e63,#071c40)]"
+                      : "h-[64px] flex items-center justify-center"
+                  }
+                >
                   {logo ? (
                     // eslint-disable-next-line @next/next/no-img-element
                     <img
                       src={logo}
                       alt={nome}
                       loading="lazy"
-                      className="h-[42px] w-auto max-w-[140px] object-contain"
+                      className={`w-auto object-contain ${escuro ? "h-[40px] max-w-[110px]" : "h-[42px] max-w-[140px]"}`}
                     />
                   ) : (
                     <span className="text-base font-bold uppercase tracking-wide text-gray-400 transition-colors group-hover:text-primary">
