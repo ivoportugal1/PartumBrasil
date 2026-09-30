@@ -59,7 +59,8 @@ const BRAND_LIST = [
   "Kadesh", "Kala", "Kalipso", "Ledan", "Libus", "Maicol", "Mapa",
   "Marluvas", "MSA", "Mucambo", "Norton", "Nove54", "Nutriex", "Partum",
   "Plastcor", "Promat", "Protecap", "Rhino", "Soft Works", "Solida",
-  "Steelflex", "Super Safety", "Thompson", "Tramontina", "Valeplast",
+  "Steelflex", "Super Safety", "Thompson", "Tramontina", "Ultra Master",
+  "Valeplast",
   "Vicsa", "Vicunha", "Volk", "Vonder", "Vulcaflex", "Worker", "Zanel",
   "3M",
 ];
@@ -157,4 +158,58 @@ export function getCategoryName(slug: string): string {
 
 export function getCategoryCount(slug: string): number {
   return allProducts.filter((p) => p.category === slug).length;
+}
+
+/* ---------------- Páginas de marca ---------------- */
+
+export const brandSlug = (name: string) =>
+  deburr(name).replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+
+const brandBySlug = new Map<string, string>();
+for (const b of brandById.values()) brandBySlug.set(brandSlug(b), b);
+
+export function getAllBrands(): { name: string; slug: string; count: number }[] {
+  const counts = new Map<string, number>();
+  for (const b of brandById.values()) counts.set(b, (counts.get(b) ?? 0) + 1);
+  return [...counts.entries()]
+    .map(([name, count]) => ({ name, slug: brandSlug(name), count }))
+    .sort((a, b) => b.count - a.count || a.name.localeCompare(b.name));
+}
+
+export function getBrandNameBySlug(slug: string): string | null {
+  return brandBySlug.get(slug) ?? null;
+}
+
+export function getCategoriesOfBrand(brand: string): { name: string; slug: string; count: number }[] {
+  const counts = new Map<string, number>();
+  for (const p of allProducts) {
+    if (brandById.get(p.id) !== brand) continue;
+    counts.set(p.category, (counts.get(p.category) ?? 0) + 1);
+  }
+  return [...counts.entries()]
+    .map(([slug, count]) => ({ slug, name: getCategoryName(slug), count }))
+    .sort((a, b) => b.count - a.count);
+}
+
+export function getProductsByBrand(
+  brand: string,
+  page = 1,
+  search = "",
+  categoria = ""
+): { products: SimpleProduct[]; total: number; totalPages: number } {
+  let filtered = allProducts.filter((p) => brandById.get(p.id) === brand);
+
+  if (categoria.trim()) filtered = filtered.filter((p) => p.category === categoria);
+
+  if (search.trim()) {
+    const q = search.toLowerCase();
+    filtered = filtered.filter(
+      (p) => p.name.toLowerCase().includes(q) || p.code.toLowerCase().includes(q)
+    );
+  }
+
+  const total = filtered.length;
+  const totalPages = Math.ceil(total / ITEMS_PER_PAGE);
+  const start = (page - 1) * ITEMS_PER_PAGE;
+  return { products: filtered.slice(start, start + ITEMS_PER_PAGE), total, totalPages };
 }
