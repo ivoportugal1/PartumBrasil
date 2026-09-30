@@ -1,0 +1,4 @@
+saida.txt
+node_modules/
+.next/
+*.tsbuildinfo

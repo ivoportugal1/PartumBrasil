@@ -19,7 +19,7 @@ const DESTAQUE: { nome: string; logo: string | null }[] = [
   { nome: "Rhino", logo: "/marcas/rhino.png" },
   { nome: "Camper", logo: "/marcas/camper.svg" },
   { nome: "Ultra Master", logo: null },
-  { nome: "Steelflex", logo: null },
+  { nome: "Steelflex", logo: "/marcas/steelflex.png" },
 ];
 
 export default function Parceiros() {

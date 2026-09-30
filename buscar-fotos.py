@@ -23,6 +23,7 @@ import time
 import ssl
 import urllib.request
 import urllib.error
+import urllib.parse
 
 RAIZ = os.path.dirname(os.path.abspath(__file__))
 CATALOGO = os.path.join(RAIZ, "lib", "products-data.json")
@@ -150,8 +151,23 @@ def faltantes(marca=None):
     return unicos
 
 
+def codificar_url(url):
+    """Codifica caracteres fora do ASCII (travessao, acento...) e espacos no
+    caminho/query, sem mexer no que ja esta codificado (%XX)."""
+    p = urllib.parse.urlsplit(url)
+    seguro = "/%:@!$&'()*+,;=~-._"
+    return urllib.parse.urlunsplit((
+        p.scheme,
+        p.netloc.encode("idna").decode("ascii"),
+        urllib.parse.quote(p.path, safe=seguro),
+        urllib.parse.quote(p.query, safe=seguro + "?"),
+        p.fragment,
+    ))
+
+
 def baixar(url, timeout=20, detalhe=False):
     """Devolve (bytes, extensao) ou None. Com detalhe=True devolve (None, motivo)."""
+    url = codificar_url(url)
     req = urllib.request.Request(url, headers=UA)
     try:
         with urllib.request.urlopen(req, timeout=timeout, context=CTX) as r:
