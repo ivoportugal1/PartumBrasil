@@ -1,5 +1,11 @@
 import Link from "next/link";
+import fs from "node:fs";
+import path from "node:path";
 import { getAllBrands, brandSlug } from "@/lib/products";
+
+// logo só entra se o arquivo existir de verdade em public/; senão vira card de texto
+const existe = (arquivo: string | null) =>
+  !!arquivo && fs.existsSync(path.join(process.cwd(), "public", arquivo));
 
 /* Marcas destacadas na home, na ordem em que aparecem.
    logo = arquivo em public/marcas/. Marca sem logo aparece
@@ -11,7 +17,7 @@ const DESTAQUE: { nome: string; logo: string | null }[] = [
   { nome: "3M", logo: "/marcas/3m.png" },
   { nome: "MSA", logo: "/marcas/msa.png" },
   { nome: "Rhino", logo: "/marcas/rhino.png" },
-  { nome: "Camper", logo: null },
+  { nome: "Camper", logo: "/marcas/camper.svg" },
   { nome: "Ultra Master", logo: null },
   { nome: "Steelflex", logo: null },
 ];
@@ -46,8 +52,9 @@ export default function Parceiros() {
         </p>
 
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3.5">
-          {DESTAQUE.map(({ nome, logo }) => {
+          {DESTAQUE.map(({ nome, logo: arquivo }) => {
             const n = contagem.get(nome) ?? 0;
+            const logo = existe(arquivo) ? arquivo : null;
             return (
               <Link
                 key={nome}
@@ -61,7 +68,7 @@ export default function Parceiros() {
                       src={logo}
                       alt={nome}
                       loading="lazy"
-                      className="max-h-[42px] w-auto max-w-[140px] object-contain"
+                      className="h-[42px] w-auto max-w-[140px] object-contain"
                     />
                   ) : (
                     <span className="text-base font-bold uppercase tracking-wide text-gray-400 transition-colors group-hover:text-primary">
