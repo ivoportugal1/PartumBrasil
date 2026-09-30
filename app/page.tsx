@@ -1,6 +1,7 @@
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import Welcome from "@/components/Welcome";
+import Novidades from "@/components/Novidades";
 import Categories from "@/components/Categories";
 import Parceiros from "@/components/Parceiros";
 import Features from "@/components/Features";
@@ -15,6 +16,7 @@ export default function Home() {
       <main>
         <Hero />
         <Welcome />
+        <Novidades />
         <Categories />
         <Parceiros />
         <Features />

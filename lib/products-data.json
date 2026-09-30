@@ -70915,5 +70915,35 @@
     "slug": "tecido-rhodes",
     "baseName": "tecido rhodes",
     "imageCode": "ZCV40001A"
+  },
+  {
+    "id": "7454",
+    "code": "45485",
+    "name": "Botina bidensidade cadarco bico pvc nobuck marrom solado antiderrapante CA 45485 Delta Plus",
+    "category": "calcados",
+    "slug": "botina-bidensidade-cadarco-bico-pvc-nobuck-marrom-solado-antiderrapante-ca-45485-delta-plus",
+    "baseName": "botina bidensidade cadarco bico pvc nobuck marrom solado antiderrapante ca 45485 delta plus",
+    "imageCode": "45485",
+    "brand": "Delta Plus"
+  },
+  {
+    "id": "7455",
+    "code": "49230",
+    "name": "Botina microfibra eletricista 500V bico composite palmilha antiperfuro CA 49230 Delta Plus",
+    "category": "calcados",
+    "slug": "botina-microfibra-eletricista-500v-bico-composite-palmilha-antiperfuro-ca-49230-delta-plus",
+    "baseName": "botina microfibra eletricista 500v bico composite palmilha antiperfuro ca 49230 delta plus",
+    "imageCode": "49230",
+    "brand": "Delta Plus"
+  },
+  {
+    "id": "7456",
+    "code": "45374",
+    "name": "Botina bidensidade Londrina nobuck marrom bico pvc CA 45374 Delta Plus",
+    "category": "calcados",
+    "slug": "botina-bidensidade-londrina-nobuck-marrom-bico-pvc-ca-45374-delta-plus",
+    "baseName": "botina bidensidade londrina nobuck marrom bico pvc ca 45374 delta plus",
+    "imageCode": "45374",
+    "brand": "Delta Plus"
   }
 ]
