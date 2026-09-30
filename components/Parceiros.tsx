@@ -46,10 +46,10 @@ export default function Parceiros() {
         </div>
 
         <h2 className="text-white text-3xl lg:text-4xl font-extrabold leading-tight max-w-2xl">
-          Trabalhamos com as maiores marcas do mercado
+          Muito além de fornecedores. Parceiros.
         </h2>
         <p className="mt-2 mb-10 text-white/60 text-base max-w-xl">
-          Equipamentos certificados, com CA válido, das fabricantes que o mercado já conhece.
+          Trabalhamos lado a lado com marcas que acreditam na capacitação e no desenvolvimento de quem está na linha de frente.
         </p>
 
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3.5">
