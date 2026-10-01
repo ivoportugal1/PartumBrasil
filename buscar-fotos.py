@@ -128,7 +128,9 @@ def carregar():
 def ja_tem_foto():
     if not os.path.isdir(DESTINO):
         return set()
-    return {os.path.splitext(f)[0] for f in os.listdir(DESTINO)}
+    # arquivo vazio (0 bytes) nao conta como foto: precisa ser baixado de novo
+    return {os.path.splitext(f)[0] for f in os.listdir(DESTINO)
+            if os.path.getsize(os.path.join(DESTINO, f)) > 0}
 
 
 def faltantes(marca=None):
