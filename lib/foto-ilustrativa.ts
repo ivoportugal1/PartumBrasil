@@ -3,6 +3,21 @@
    imageCode (ou o code) do produto. Para tirar o aviso, é só remover o código
    daqui quando a foto correta for colocada em public/produtos. */
 export const FOTO_ILUSTRATIVA = new Set<string>([
+  "7893946467623",
+  "7893946467654",
+  "7893946467708",
+  "7893946467760",
+  "7893946467784",
+  "7893946467531",
+  "7893946467548",
+  "7893946467562",
+  "7893946467579",
+  "7893946467586",
+  "7893946535544",
+  "7893946535551",
+  "7893946535568",
+  "7893946535575",
+  "7893946535582",
   "7899956606557",
   "341621",
   "VIC5612000CZ",
