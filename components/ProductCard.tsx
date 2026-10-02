@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { SimpleProduct } from "@/lib/products";
 import AddToCartButton from "./AddToCartButton";
 import ProductImage from "./ProductImage";
+import { isFotoIlustrativa } from "@/lib/foto-ilustrativa";
 
 const categoryColors: Record<string, string> = {
   luvas: "bg-blue-100 text-blue-700",
@@ -26,8 +27,15 @@ export default function ProductCard({ product }: { product: SimpleProduct }) {
   return (
     <div className="group bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-md hover:border-primary/20 transition-all duration-200 flex flex-col overflow-hidden">
       {/* Imagem ou ícone */}
-      <div className="group-hover:scale-105 transition-transform duration-300">
-        <ProductImage code={product.code} imageCode={product.imageCode} name={product.name} category={product.category} size="card" />
+      <div className="relative">
+        <div className="group-hover:scale-105 transition-transform duration-300">
+          <ProductImage code={product.code} imageCode={product.imageCode} name={product.name} category={product.category} size="card" />
+        </div>
+        {isFotoIlustrativa(product.imageCode, product.code) && (
+          <span className="absolute bottom-1.5 left-1.5 rounded bg-white/90 px-1.5 py-0.5 text-[10px] font-medium text-gray-500 shadow-sm ring-1 ring-black/5">
+            Imagem ilustrativa
+          </span>
+        )}
       </div>
 
       {/* Info */}

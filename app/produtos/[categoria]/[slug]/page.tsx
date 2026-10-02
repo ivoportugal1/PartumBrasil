@@ -7,6 +7,7 @@ import AddToCartButton from "@/components/AddToCartButton";
 import ProductCard from "@/components/ProductCard";
 import ProductImage from "@/components/ProductImage";
 import { allProducts, getProductBySlug, getCategoryName, categories } from "@/lib/products";
+import { isFotoIlustrativa } from "@/lib/foto-ilustrativa";
 
 export const dynamic = "force-dynamic";
 
@@ -36,6 +37,7 @@ export default async function ProductPage({
   // Extrai marca (última palavra se depois de um nome de empresa comum)
   const brandMatch = product.name.match(/(Bracol|Marluvas|3M|MSA|Honeywell|Danny|Kalipso|Plastcor|Vonder|Agroindustrial|Ledan|Hercules|Mucambo|Dystray|GB Luvas|Victor|VT|Partum|Solida|Crival|Ferreira Mold|Prevemax|Baden)$/i);
   const brand = brandMatch ? brandMatch[1] : null;
+  const ilustrativa = isFotoIlustrativa(product.imageCode, product.code);
 
   return (
     <>
@@ -55,7 +57,7 @@ export default async function ProductPage({
           <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
               {/* Imagem do produto */}
-              <div className="min-h-72 flex items-center justify-center">
+              <div className="min-h-72 flex flex-col items-center justify-center">
                 <ProductImage
                   code={product.code}
                   imageCode={product.imageCode}
@@ -63,6 +65,17 @@ export default async function ProductPage({
                   category={product.category}
                   size="large"
                 />
+                {ilustrativa && (
+                  <p className="mx-6 mb-6 mt-1 flex items-start gap-2 rounded-lg bg-primary/5 px-3.5 py-2.5 text-xs leading-relaxed text-primary ring-1 ring-primary/10">
+                    <svg className="mt-0.5 h-4 w-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <span>
+                      <strong className="font-semibold">Imagem ilustrativa.</strong> A foto mostra o mesmo modelo em
+                      outra cor. Confirme a cor disponível com a nossa equipe antes de fechar o pedido.
+                    </span>
+                  </p>
+                )}
               </div>
 
               {/* Detalhes */}
