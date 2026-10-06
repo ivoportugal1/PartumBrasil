@@ -63,7 +63,13 @@ export default function Contact() {
                     </svg>
                   ),
                   label: "Telefone",
-                  value: "(71) 2136-4247 / (71) 98307-0736",
+                  value: (
+                    <>
+                      <a href="tel:+557121364247" className="hover:text-accent transition-colors">(71) 2136-4247</a>
+                      {" / "}
+                      <a href="tel:+5571983070736" className="hover:text-accent transition-colors">(71) 98307-0736</a>
+                    </>
+                  ),
                 },
                 {
                   icon: (
