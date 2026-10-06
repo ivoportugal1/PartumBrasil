@@ -63,7 +63,7 @@ export default function Contact() {
                     </svg>
                   ),
                   label: "Telefone",
-                  value: "(71) 3040-3041 / (71) 98307-0736",
+                  value: "(71) 2136-4247",
                 },
                 {
                   icon: (
