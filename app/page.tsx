@@ -1,10 +1,10 @@
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
-import Welcome from "@/components/Welcome";
-import Novidades from "@/components/Novidades";
 import Categories from "@/components/Categories";
+import Novidades from "@/components/Novidades";
 import Parceiros from "@/components/Parceiros";
-import Features from "@/components/Features";
+import Sobre from "@/components/Sobre";
+import CtaBand from "@/components/CtaBand";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
@@ -13,13 +13,13 @@ export default function Home() {
   return (
     <>
       <Header />
-      <main>
+      <main id="conteudo">
         <Hero />
-        <Welcome />
-        <Novidades />
         <Categories />
+        <Novidades />
         <Parceiros />
-        <Features />
+        <Sobre />
+        <CtaBand />
         <Contact />
       </main>
       <Footer />

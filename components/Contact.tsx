@@ -1,26 +1,25 @@
 "use client";
 
 import { useState } from "react";
+import { SITE, whatsappLink } from "@/lib/site";
+import { IconPhone, IconMail, IconMapPin, IconWhatsApp, IconCheck, IconLoader } from "./icons";
 
+/* Formulário de contato. Continua enviando para /api/contato (e-mail via
+   Resend). Nada de sucesso simulado: só confirma quando a API responde ok. */
 export default function Contact() {
-  const [submitted, setSubmitted] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setLoading(true);
-    setError("");
-
-    const form = e.currentTarget;
+    setStatus("sending");
+    const f = new FormData(e.currentTarget);
     const data = {
-      nome: (form.elements.namedItem("nome") as HTMLInputElement).value,
-      empresa: (form.elements.namedItem("empresa") as HTMLInputElement).value,
-      email: (form.elements.namedItem("email") as HTMLInputElement).value,
-      telefone: (form.elements.namedItem("telefone") as HTMLInputElement).value,
-      mensagem: (form.elements.namedItem("mensagem") as HTMLTextAreaElement).value,
+      nome: String(f.get("nome") ?? "").trim(),
+      empresa: String(f.get("empresa") ?? "").trim(),
+      email: String(f.get("email") ?? "").trim(),
+      telefone: String(f.get("telefone") ?? "").trim(),
+      mensagem: String(f.get("mensagem") ?? "").trim(),
     };
-
     try {
       const res = await fetch("/api/contato", {
         method: "POST",
@@ -28,173 +27,137 @@ export default function Contact() {
         body: JSON.stringify(data),
       });
       if (!res.ok) throw new Error();
-      setSubmitted(true);
+      setStatus("sent");
     } catch {
-      setError("Erro ao enviar. Tente novamente ou fale via WhatsApp.");
-    } finally {
-      setLoading(false);
+      setStatus("error");
     }
   }
 
   return (
-    <section id="contato" className="py-20 bg-surface">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-          {/* Info */}
-          <div>
-            <span className="text-primary font-semibold text-sm uppercase tracking-widest">
-              Fale Conosco
-            </span>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 mt-2 mb-4">
-              Solicite um Orçamento
-            </h2>
-            <p className="text-gray-500 leading-relaxed mb-8">
-              Preencha o formulário ou entre em contato diretamente. Nossa equipe
-              responde em até 24 horas com a melhor proposta para sua empresa.
-            </p>
+    <section id="contato" className="border-t border-line bg-surface py-20 lg:py-24">
+      <div className="container-page grid gap-12 lg:grid-cols-[1fr_1.15fr] lg:gap-16">
+        <div>
+          <p className="eyebrow">Contato</p>
+          <h2 className="h-section mt-3">Fale com a equipe comercial</h2>
+          <p className="mt-4 max-w-md leading-relaxed text-muted">
+            Conte o que sua empresa precisa: produtos, quantidades e prazo. Para listas maiores,
+            use a lista de orçamento do catálogo.
+          </p>
 
-            <div className="space-y-5">
-              {[
-                {
-                  icon: (
-                    <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
-                        d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
-                    </svg>
-                  ),
-                  label: "Telefone",
-                  value: (
-                    <>
-                      <a href="tel:+557121364247" className="hover:text-accent transition-colors">(71) 2136-4247</a>
-                      {" / "}
-                      <a href="tel:+5571983070736" className="hover:text-accent transition-colors">(71) 98307-0736</a>
-                    </>
-                  ),
-                },
-                {
-                  icon: (
-                    <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
-                        d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
-                    </svg>
-                  ),
-                  label: "E-mail",
-                  value: "vendas04@partumbrasil.com.br",
-                },
-                {
-                  icon: (
-                    <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
-                        d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
-                        d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
-                    </svg>
-                  ),
-                  label: "Endereço",
-                  value: "Tv. Industrial Urbana, 02 — Ponto Certo, Camaçari — BA, CEP 42800-145",
-                },
-              ].map((item) => (
-                <div key={item.label} className="flex items-start gap-4">
-                  <div className="w-10 h-10 bg-primary/10 text-primary rounded-lg flex items-center justify-center shrink-0">
-                    {item.icon}
-                  </div>
-                  <div>
-                    <p className="text-xs text-gray-400 font-medium uppercase tracking-wide">{item.label}</p>
-                    <p className="text-gray-800 font-medium mt-0.5">{item.value}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
+          <ul className="mt-8 divide-y divide-line border-y border-line">
+            <ContactRow icon={IconPhone} label="Telefone">
+              <a href={SITE.phone.href} className="hover:text-accent">{SITE.phone.label}</a>
+            </ContactRow>
+            <ContactRow icon={IconWhatsApp} label="WhatsApp">
+              <a
+                href={whatsappLink("Olá! Gostaria de falar com a equipe comercial da Partum.")}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-accent"
+              >
+                {SITE.whatsapp.label}
+              </a>
+            </ContactRow>
+            <ContactRow icon={IconMail} label="E-mail">
+              <a href={`mailto:${SITE.email}`} className="break-all hover:text-accent">{SITE.email}</a>
+            </ContactRow>
+            <ContactRow icon={IconMapPin} label="Endereço">
+              {SITE.address.street}, {SITE.address.city}, {SITE.address.zip}
+            </ContactRow>
+          </ul>
 
-            {/* Mapa */}
-            <div className="mt-8 rounded-2xl overflow-hidden border border-gray-100 shadow-sm h-56">
-              <iframe
-                title="Localização Partum Brasil"
-                src="https://www.google.com/maps?q=Partum+Fardamentos+Industriais+e+Epis,+Tv.+Industrial+Urbana,+02,+Ponto+Certo,+Camaçari,+BA&output=embed&z=15"
-                width="100%"
-                height="100%"
-                style={{ border: 0 }}
-                allowFullScreen
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-              />
-            </div>
+          <div className="mt-8 h-56 overflow-hidden rounded-[var(--radius-card)] border border-line bg-white">
+            <iframe
+              title="Localização da Partum Brasil em Camaçari"
+              src="https://www.google.com/maps?q=Partum+Fardamentos+Industriais+e+Epis,+Tv.+Industrial+Urbana,+02,+Ponto+Certo,+Camaçari,+BA&output=embed&z=15"
+              width="100%"
+              height="100%"
+              style={{ border: 0 }}
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            />
           </div>
+        </div>
 
-          {/* Form */}
-          <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
-            {submitted ? (
-              <div className="text-center py-8">
-                <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <svg className="w-8 h-8 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                  </svg>
-                </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-2">Solicitação enviada!</h3>
-                <p className="text-gray-500">Nossa equipe entrará em contato em até 24 horas.</p>
-                <button
-                  onClick={() => setSubmitted(false)}
-                  className="mt-6 text-primary text-sm font-semibold hover:underline"
-                >
-                  Enviar outra mensagem
-                </button>
+        <div className="rounded-[var(--radius-card)] border border-line bg-white p-6 sm:p-8">
+          {status === "sent" ? (
+            <div className="py-10 text-center" role="status">
+              <span className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-sky text-accent">
+                <IconCheck size={24} />
+              </span>
+              <h3 className="mt-4 font-display text-xl font-bold text-ink">Mensagem enviada</h3>
+              <p className="mt-2 text-muted">Recebemos sua solicitação. A equipe comercial vai responder pelo e-mail informado.</p>
+              <button onClick={() => setStatus("idle")} className="btn-link mt-6">Enviar outra mensagem</button>
+            </div>
+          ) : (
+            <form onSubmit={handleSubmit} className="space-y-5" noValidate={false}>
+              <h3 className="font-display text-lg font-bold text-ink">Solicitar orçamento</h3>
+              <div className="grid gap-5 sm:grid-cols-2">
+                <Field id="nome" label="Nome" required>
+                  <input id="nome" name="nome" type="text" required autoComplete="name" className="field" />
+                </Field>
+                <Field id="empresa" label="Empresa">
+                  <input id="empresa" name="empresa" type="text" autoComplete="organization" className="field" />
+                </Field>
               </div>
-            ) : (
-              <form onSubmit={handleSubmit} className="space-y-5">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1.5">Nome *</label>
-                    <input name="nome" type="text" required placeholder="Seu nome"
-                      className="w-full px-4 py-2.5 border border-gray-200 rounded-lg text-sm focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all" />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1.5">Empresa</label>
-                    <input name="empresa" type="text" placeholder="Nome da empresa"
-                      className="w-full px-4 py-2.5 border border-gray-200 rounded-lg text-sm focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all" />
-                  </div>
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1.5">E-mail *</label>
-                  <input name="email" type="email" required placeholder="seu@email.com"
-                    className="w-full px-4 py-2.5 border border-gray-200 rounded-lg text-sm focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all" />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1.5">Telefone / WhatsApp</label>
-                  <input name="telefone" type="tel" placeholder="(11) 99999-9999"
-                    className="w-full px-4 py-2.5 border border-gray-200 rounded-lg text-sm focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all" />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1.5">Produto / Mensagem *</label>
-                  <textarea name="mensagem" required rows={4}
-                    placeholder="Descreva os produtos que precisa e a quantidade estimada..."
-                    className="w-full px-4 py-2.5 border border-gray-200 rounded-lg text-sm focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all resize-none" />
-                </div>
-                {error && (
-                  <p className="text-sm text-red-500 bg-red-50 px-4 py-2.5 rounded-lg">{error}</p>
+              <div className="grid gap-5 sm:grid-cols-2">
+                <Field id="email" label="E-mail" required>
+                  <input id="email" name="email" type="email" required autoComplete="email" className="field" />
+                </Field>
+                <Field id="telefone" label="Telefone ou WhatsApp">
+                  <input id="telefone" name="telefone" type="tel" autoComplete="tel" placeholder="(71) 99999-9999" className="field" />
+                </Field>
+              </div>
+              <Field id="mensagem" label="Produtos e quantidades" required>
+                <textarea
+                  id="mensagem"
+                  name="mensagem"
+                  required
+                  rows={5}
+                  placeholder="Ex.: 50 pares de luva nitrílica tam. 9, 20 botinas bidensidade nº 40…"
+                  className="field resize-y"
+                />
+              </Field>
+
+              <div aria-live="polite">
+                {status === "error" && (
+                  <p className="rounded-md border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+                    Não foi possível enviar agora. Tente de novo ou fale pelo WhatsApp {SITE.whatsapp.label}.
+                  </p>
                 )}
-                <button
-                  type="submit"
-                  disabled={loading}
-                  className="w-full bg-primary hover:bg-primary-dark disabled:opacity-60 disabled:cursor-not-allowed text-white font-semibold py-3 rounded-xl transition-colors shadow hover:shadow-lg flex items-center justify-center gap-2"
-                >
-                  {loading ? (
-                    <>
-                      <svg className="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24">
-                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z" />
-                      </svg>
-                      Enviando...
-                    </>
-                  ) : "Enviar Solicitação"}
-                </button>
-                <p className="text-xs text-gray-400 text-center">
-                  Ao enviar, você concorda com nossa política de privacidade.
-                </p>
-              </form>
-            )}
-          </div>
+              </div>
+
+              <button type="submit" disabled={status === "sending"} className="btn-primary h-12 w-full">
+                {status === "sending" ? (<><IconLoader size={18} /> Enviando…</>) : "Enviar solicitação"}
+              </button>
+              <p className="text-center text-xs text-muted">Usamos seus dados só para responder a esta solicitação.</p>
+            </form>
+          )}
         </div>
       </div>
     </section>
+  );
+}
+
+function Field({ id, label, required, children }: { id: string; label: string; required?: boolean; children: React.ReactNode }) {
+  return (
+    <div>
+      <label htmlFor={id} className="label">
+        {label} {required && <span className="text-accent" aria-hidden="true">*</span>}
+      </label>
+      {children}
+    </div>
+  );
+}
+
+function ContactRow({ icon: Icon, label, children }: { icon: (p: { size?: number }) => React.ReactElement; label: string; children: React.ReactNode }) {
+  return (
+    <li className="flex items-start gap-4 py-4">
+      <span className="mt-0.5 text-primary"><Icon size={18} /></span>
+      <div>
+        <p className="text-xs font-medium uppercase tracking-wider text-muted">{label}</p>
+        <p className="mt-0.5 text-sm font-medium text-ink">{children}</p>
+      </div>
+    </li>
   );
 }

@@ -1,170 +1,178 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import AddToCartButton from "@/components/AddToCartButton";
 import ProductCard from "@/components/ProductCard";
 import ProductImage from "@/components/ProductImage";
-import { allProducts, getProductBySlug, getCategoryName, categories } from "@/lib/products";
+import { getProductBySlug, getCategoryName, getRelatedProducts, brandOf, brandSlug, hasPhoto, photoKey } from "@/lib/products";
 import { isFotoIlustrativa } from "@/lib/foto-ilustrativa";
+import { SITE, whatsappLink } from "@/lib/site";
+import { IconChevronRight, IconWhatsApp, IconInfo, IconPhone, IconMail, IconShieldCheck } from "@/components/icons";
 
 export const dynamic = "force-dynamic";
 
-const categoryIcons: Record<string, string> = {
-  luvas: "🧤", oculos: "🥽", couro: "🧥",
-  mascaras: "😷", capacetes: "⛑️", diversos: "📦",
-};
+/* CA escrito no nome do produto (ex.: "CA 41562", "C.A 13.779") */
+function extractCA(name: string) {
+  return name.match(/C\.?\s?A\.?\s*:?\s*([\d.]{3,7})/i)?.[1]?.replace(/\./g, "") ?? null;
+}
 
-export default async function ProductPage({
-  params,
-}: {
-  params: Promise<{ categoria: string; slug: string }>;
-}) {
+export async function generateMetadata({ params }: { params: Promise<{ categoria: string; slug: string }> }): Promise<Metadata> {
+  const { slug, categoria } = await params;
+  const p = getProductBySlug(slug);
+  if (!p || p.category !== categoria) return {};
+  const marca = brandOf(p);
+  const ca = extractCA(p.name);
+  const desc = [
+    p.name,
+    marca ? `Marca ${marca}.` : "",
+    ca ? `CA ${ca}.` : "",
+    `Código ${p.code}. Solicite orçamento na Partum Brasil.`,
+  ].filter(Boolean).join(" ");
+  const img = hasPhoto(p) ? `/produtos/${photoKey(p)}.webp` : undefined;
+  return {
+    title: p.name,
+    description: desc,
+    alternates: { canonical: `/produtos/${categoria}/${slug}` },
+    openGraph: { title: p.name, description: desc, images: img ? [{ url: img }] : undefined },
+  };
+}
+
+export default async function ProductPage({ params }: { params: Promise<{ categoria: string; slug: string }> }) {
   const { categoria, slug } = await params;
   const product = getProductBySlug(slug);
-
   if (!product || product.category !== categoria) notFound();
 
-  const related = allProducts
-    .filter((p) => p.category === categoria && p.id !== product.id)
-    .slice(0, 5);
-
-  // Extrai CA do nome se existir
-  const caMatch = product.name.match(/CA[\s.]*([\d]+)/i);
-  const ca = caMatch ? `CA ${caMatch[1]}` : null;
-
-  // Extrai marca (última palavra se depois de um nome de empresa comum)
-  const brandMatch = product.name.match(/(Bracol|Marluvas|3M|MSA|Honeywell|Danny|Kalipso|Plastcor|Vonder|Agroindustrial|Ledan|Hercules|Mucambo|Dystray|GB Luvas|Victor|VT|Partum|Solida|Crival|Ferreira Mold|Prevemax|Baden)$/i);
-  const brand = brandMatch ? brandMatch[1] : null;
+  const marca = brandOf(product);
+  const ca = extractCA(product.name);
+  const categoriaNome = getCategoryName(categoria);
   const ilustrativa = isFotoIlustrativa(product.imageCode, product.code);
+  const related = getRelatedProducts(product, 4);
+  const url = `${SITE.url}/produtos/${categoria}/${slug}`;
+
+  const msg = [
+    "Olá! Gostaria de um orçamento deste produto:",
+    product.name,
+    `Código: ${product.code}`,
+    marca ? `Marca: ${marca}` : "",
+    url,
+  ].filter(Boolean).join("\n");
 
   return (
     <>
       <Header />
-      <main className="flex-1 bg-surface">
-
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-10">
-          <nav className="flex items-center gap-2 text-sm text-gray-400 mb-6">
-            <Link href="/" className="hover:text-primary transition-colors">Início</Link>
-            <span>›</span>
-            <Link href={`/produtos/${categoria}`} className="hover:text-primary transition-colors">
-              {getCategoryName(categoria)}
-            </Link>
-            <span>›</span>
-            <span className="text-gray-600 line-clamp-1">{product.name}</span>
+      <main id="conteudo" className="flex-1 bg-surface">
+        <div className="container-page py-6 lg:py-8">
+          <nav aria-label="Trilha" className="text-xs text-muted">
+            <ol className="flex flex-wrap items-center gap-1.5">
+              <li><Link href="/" className="hover:text-accent">Início</Link></li>
+              <li className="flex items-center gap-1.5"><IconChevronRight size={12} className="text-line" /><Link href={`/produtos/${categoria}`} className="hover:text-accent">{categoriaNome}</Link></li>
+              <li className="flex min-w-0 items-center gap-1.5"><IconChevronRight size={12} className="text-line" /><span className="line-clamp-1 text-graphite">{product.name}</span></li>
+            </ol>
           </nav>
-          <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
-              {/* Imagem do produto */}
-              <div className="min-h-72 flex flex-col items-center justify-center">
-                <ProductImage
-                  code={product.code}
-                  imageCode={product.imageCode}
-                  name={product.name}
-                  category={product.category}
-                  size="large"
-                />
-                {ilustrativa && (
-                  <p className="mx-6 mb-6 mt-1 flex items-start gap-2 rounded-lg bg-primary/5 px-3.5 py-2.5 text-xs leading-relaxed text-primary ring-1 ring-primary/10">
-                    <svg className="mt-0.5 h-4 w-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    <span>
-                      <strong className="font-semibold">Imagem ilustrativa.</strong> A foto mostra o mesmo modelo em
-                      outra cor. Confirme a cor disponível com a nossa equipe antes de fechar o pedido.
-                    </span>
-                  </p>
+
+          <div className="mt-5 grid overflow-hidden rounded-[var(--radius-card)] border border-line bg-white lg:grid-cols-2">
+            {/* Imagem */}
+            <div className="border-b border-line lg:border-b-0 lg:border-r">
+              <ProductImage code={product.code} imageCode={product.imageCode} name={product.name} category={product.category} size="large" />
+              {ilustrativa && (
+                <p className="mx-5 mb-5 flex items-start gap-2 rounded-md bg-sky px-3.5 py-2.5 text-xs leading-relaxed text-primary">
+                  <IconInfo size={16} className="mt-px shrink-0" />
+                  <span>
+                    <strong className="font-semibold">Cor ilustrativa.</strong> A foto mostra o mesmo modelo em outra cor.
+                    Confirme a cor disponível com a equipe antes de fechar o pedido.
+                  </span>
+                </p>
+              )}
+            </div>
+
+            {/* Dados e ações */}
+            <div className="flex flex-col p-6 sm:p-8 lg:p-10">
+              <div className="flex flex-wrap items-center gap-2 text-xs">
+                {marca && (
+                  <Link href={`/marcas/${brandSlug(marca)}`} className="font-semibold uppercase tracking-wider text-primary hover:text-accent">
+                    {marca}
+                  </Link>
                 )}
+                {marca && <span className="text-line">|</span>}
+                <Link href={`/produtos/${categoria}`} className="text-muted hover:text-accent">{categoriaNome}</Link>
               </div>
 
-              {/* Detalhes */}
-              <div className="p-8 lg:p-10 flex flex-col">
-                {product.code && (
-                  <p className="text-xs text-gray-400 font-mono mb-2">Cód. {product.code}</p>
+              <h1 className="mt-3 font-display text-2xl font-bold leading-tight tracking-tight text-ink sm:text-[1.75rem]">
+                {product.name}
+              </h1>
+
+              {ca && (
+                <p className="mt-4 inline-flex w-fit items-center gap-2 rounded-md border border-line bg-surface px-3 py-1.5 text-sm text-ink">
+                  <IconShieldCheck size={16} className="text-accent" />
+                  Certificado de Aprovação <strong className="font-semibold">CA {ca}</strong>
+                </p>
+              )}
+
+              <dl className="mt-6 divide-y divide-line border-y border-line text-sm">
+                <Row term="Código" value={<span className="font-mono">{product.code}</span>} />
+                {marca && <Row term="Marca" value={marca} />}
+                <Row term="Categoria" value={categoriaNome} />
+                {ca && (
+                  <Row
+                    term="CA"
+                    value={
+                      <a href={`https://consultaca.com/${ca}`} target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">
+                        {ca} — consultar validade
+                      </a>
+                    }
+                  />
                 )}
+                <Row term="Tamanhos, cores e prazo" value={<span className="text-muted">Confirmados pela equipe comercial no orçamento</span>} />
+              </dl>
 
-                <h1 className="text-2xl lg:text-3xl font-extrabold text-gray-900 leading-tight mb-4">
-                  {product.name}
-                </h1>
+              <div className="mt-8 space-y-3">
+                <AddToCartButton product={product} large />
+                <a href={whatsappLink(msg)} target="_blank" rel="noopener noreferrer" className="btn-secondary h-12 w-full text-[15px]">
+                  <IconWhatsApp size={18} /> Consultar pelo WhatsApp
+                </a>
+                <p className="text-center text-xs text-muted">
+                  Preço sob consulta. A mensagem do WhatsApp já vai com o nome, o código e o link deste produto.
+                </p>
+              </div>
 
-                <div className="flex flex-wrap gap-2 mb-6">
-                  {ca && (
-                    <span className="bg-green-50 text-green-700 text-xs font-semibold px-3 py-1 rounded-full border border-green-200">
-                      ✓ {ca}
-                    </span>
-                  )}
-                  {brand && (
-                    <span className="bg-primary/10 text-primary text-xs font-semibold px-3 py-1 rounded-full">
-                      {brand}
-                    </span>
-                  )}
-                </div>
-
-                <div className="bg-surface rounded-xl p-5 mb-6">
-                  <p className="text-sm font-bold text-gray-700 mb-3 uppercase tracking-wide">Informações</p>
-                  <div className="space-y-2 text-sm text-gray-600">
-                    <div className="flex justify-between">
-                      <span className="text-gray-400">Categoria</span>
-                      <span className="font-medium">{getCategoryName(categoria)}</span>
-                    </div>
-                    {product.code && (
-                      <div className="flex justify-between">
-                        <span className="text-gray-400">Código</span>
-                        <span className="font-mono font-medium">{product.code}</span>
-                      </div>
-                    )}
-                    {ca && (
-                      <div className="flex justify-between">
-                        <span className="text-gray-400">Certificado</span>
-                        <span className="font-medium text-green-700">{ca} ✓</span>
-                      </div>
-                    )}
-                    {brand && (
-                      <div className="flex justify-between">
-                        <span className="text-gray-400">Marca</span>
-                        <span className="font-medium">{brand}</span>
-                      </div>
-                    )}
-                  </div>
-                </div>
-
-                <div className="border-t border-gray-100 pt-6 space-y-3">
-                  <p className="text-xs text-gray-400 text-center">
-                    Preço sob consulta — solicite um orçamento personalizado
-                  </p>
-                  <AddToCartButton product={product as any} large />
-                  <a
-                    href={`https://wa.me/5571983070736?text=Olá! Tenho interesse no produto: ${encodeURIComponent(product.name)}${product.code ? ` (Cód. ${product.code})` : ""}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center justify-center gap-2 w-full py-3 border-2 border-green-500 text-green-600 hover:bg-green-50 font-semibold rounded-xl transition-colors text-sm"
-                  >
-                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
-                    </svg>
-                    Consultar via WhatsApp
-                  </a>
-                </div>
+              <div className="mt-auto grid gap-2 pt-8 text-sm text-muted sm:grid-cols-2">
+                <a href={SITE.phone.href} className="inline-flex items-center gap-2 hover:text-accent"><IconPhone size={16} /> {SITE.phone.label}</a>
+                <a href={`mailto:${SITE.email}`} className="inline-flex items-center gap-2 break-all hover:text-accent"><IconMail size={16} /> {SITE.email}</a>
               </div>
             </div>
           </div>
 
-          {/* Produtos relacionados */}
           {related.length > 0 && (
-            <div className="mt-12">
-              <h2 className="text-xl font-extrabold text-gray-900 mb-6">Produtos Relacionados</h2>
-              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
-                {related.map((p) => (
-                  <ProductCard key={p.id} product={p} />
-                ))}
+            <section className="mt-14" aria-labelledby="relacionados">
+              <div className="flex items-end justify-between gap-4">
+                <h2 id="relacionados" className="font-display text-xl font-bold text-ink">
+                  {marca ? `Mais de ${marca} em ${categoriaNome.toLowerCase()}` : `Mais em ${categoriaNome.toLowerCase()}`}
+                </h2>
+                <Link href={marca ? `/marcas/${brandSlug(marca)}` : `/produtos/${categoria}`} className="btn-link shrink-0">Ver todos</Link>
               </div>
-            </div>
+              <ul className="mt-5 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
+                {related.map((p) => (
+                  <li key={p.id} className="flex"><div className="flex w-full"><ProductCard product={p} brand={brandOf(p)} /></div></li>
+                ))}
+              </ul>
+            </section>
           )}
         </div>
       </main>
       <Footer />
       <WhatsAppButton />
     </>
+  );
+}
+
+function Row({ term, value }: { term: string; value: React.ReactNode }) {
+  return (
+    <div className="grid grid-cols-[140px_1fr] gap-4 py-3">
+      <dt className="text-muted">{term}</dt>
+      <dd className="text-ink">{value}</dd>
+    </div>
   );
 }

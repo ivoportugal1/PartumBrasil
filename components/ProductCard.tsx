@@ -4,68 +4,38 @@ import AddToCartButton from "./AddToCartButton";
 import ProductImage from "./ProductImage";
 import { isFotoIlustrativa } from "@/lib/foto-ilustrativa";
 
-const categoryColors: Record<string, string> = {
-  luvas: "bg-blue-100 text-blue-700",
-  calcados: "bg-stone-100 text-stone-700",
-  oculos: "bg-cyan-100 text-cyan-700",
-  couro: "bg-amber-100 text-amber-700",
-  mascaras: "bg-green-100 text-green-700",
-  capacetes: "bg-blue-100 text-blue-700",
-  diversos: "bg-gray-100 text-gray-600",
-};
-
-const categoryIcons: Record<string, string> = {
-  luvas: "🧤",
-  oculos: "🥽",
-  couro: "🧥",
-  mascaras: "😷",
-  capacetes: "⛑️",
-  diversos: "📦",
-};
-
-export default function ProductCard({ product }: { product: SimpleProduct }) {
+/* Card de catálogo: imagem neutra, marca, código, nome e ação de orçamento.
+   `brand` vem resolvida pelo servidor (mesma lógica de todo o catálogo). */
+export default function ProductCard({ product, brand }: { product: SimpleProduct; brand?: string | null }) {
+  const href = `/produtos/${product.category}/${product.slug}`;
+  const ca = product.name.match(/C\.?\s?A\.?\s*:?\s*([\d.]{3,7})/i)?.[1]?.replace(/\./g, "");
   return (
-    <div className="group bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-md hover:border-primary/20 transition-all duration-200 flex flex-col overflow-hidden">
-      {/* Imagem ou ícone */}
-      <div className="relative">
-        <div className="group-hover:scale-105 transition-transform duration-300">
-          <ProductImage code={product.code} imageCode={product.imageCode} name={product.name} category={product.category} size="card" />
-        </div>
+    <article className="group relative flex flex-col overflow-hidden rounded-[var(--radius-card)] border border-line bg-white transition-[border-color,box-shadow] duration-200 hover:border-accent/50 hover:shadow-[0_8px_24px_rgba(11,34,64,0.08)]">
+      <Link href={href} className="relative block border-b border-line" tabIndex={-1} aria-hidden="true">
+        <ProductImage code={product.code} imageCode={product.imageCode} name={product.name} category={product.category} size="card" />
         {isFotoIlustrativa(product.imageCode, product.code) && (
-          <span className="absolute bottom-1.5 left-1.5 rounded bg-white/90 px-1.5 py-0.5 text-[10px] font-medium text-gray-500 shadow-sm ring-1 ring-black/5">
-            Imagem ilustrativa
+          <span className="absolute bottom-2 left-2 rounded bg-surface px-1.5 py-0.5 text-[10px] font-medium text-muted ring-1 ring-line">
+            Cor ilustrativa
           </span>
         )}
-      </div>
+      </Link>
 
-      {/* Info */}
-      <div className="p-4 flex flex-col flex-1">
-        <div className="flex items-center gap-2 mb-2">
-          <span className={`text-xs font-semibold px-2 py-0.5 rounded-full ${categoryColors[product.category] ?? "bg-gray-100 text-gray-600"}`}>
-            {product.category.charAt(0).toUpperCase() + product.category.slice(1)}
-          </span>
-          {product.code && (
-            <span className="text-xs text-gray-400 font-mono truncate">{product.code}</span>
-          )}
+      <div className="flex flex-1 flex-col p-3.5">
+        <div className="flex items-center justify-between gap-2 text-[11px]">
+          <span className="truncate font-semibold uppercase tracking-wider text-primary">{brand ?? " "}</span>
+          {ca && <span className="shrink-0 rounded bg-sky px-1.5 py-0.5 font-semibold text-primary">CA {ca}</span>}
         </div>
-
-        <Link
-          href={`/produtos/${product.category}/${product.slug}`}
-          className="font-semibold text-gray-900 text-sm leading-snug hover:text-primary transition-colors mb-3 flex-1 line-clamp-3"
-        >
-          {product.name}
-        </Link>
-
-        <div className="flex flex-col gap-2 mt-auto pt-3 border-t border-gray-50">
-          <AddToCartButton product={product as any} />
-          <Link
-            href={`/produtos/${product.category}/${product.slug}`}
-            className="text-center text-xs text-primary font-semibold hover:underline"
-          >
-            Ver detalhes
+        <h3 className="mt-1.5 flex-1 text-[13.5px] font-medium leading-snug text-ink">
+          <Link href={href} className="line-clamp-3 hover:text-accent">
+            <span className="absolute inset-0 z-0" aria-hidden="true" />
+            {product.name}
           </Link>
+        </h3>
+        <p className="mt-2 truncate font-mono text-[11px] text-muted">Cód. {product.code}</p>
+        <div className="relative z-10 mt-3">
+          <AddToCartButton product={product} variant="subtle" />
         </div>
       </div>
-    </div>
+    </article>
   );
 }
