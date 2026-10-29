@@ -38,7 +38,7 @@ export default function HeaderClient({
   const { total } = useCart();
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
+    const onScroll = () => setScrolled(window.scrollY > 40);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -84,13 +84,11 @@ export default function HeaderClient({
   const inProdutos = pathname.startsWith("/produtos") || pathname.startsWith("/busca");
 
   return (
-    <header className="sticky top-0 z-50">
-      {/* Faixa de contato: some no scroll para liberar espaço */}
-      <div
-        className={`hidden bg-[#071a33] text-white/70 transition-[height,opacity] duration-200 md:block ${
-          scrolled ? "h-0 opacity-0 overflow-hidden" : "h-9 opacity-100"
-        }`}
-      >
+    <header className="sticky top-0 z-50 md:-top-9">
+      {/* Faixa de contato: sai da tela rolando junto com a página (o header usa
+          top negativo igual à altura dela). Nada muda de altura no scroll, para
+          não deslocar o conteúdo nem fazer o cabeçalho "tremer". */}
+      <div className="hidden h-9 bg-[#071a33] text-white/70 md:block">
         <div className="container-page flex h-9 items-center justify-between text-xs">
           <p>Distribuidora de EPIs e fardamentos em Camaçari (BA) desde {SITE.since}</p>
           <div className="flex items-center gap-5">
@@ -109,7 +107,7 @@ export default function HeaderClient({
           scrolled ? "shadow-[0_1px_0_rgba(255,255,255,0.06),0_8px_24px_rgba(4,16,34,0.25)]" : ""
         }`}
       >
-        <div className={`container-page flex items-center gap-6 transition-[height] duration-200 ${scrolled ? "h-16" : "h-[4.5rem]"}`}>
+        <div className="container-page flex h-16 items-center gap-6 lg:h-[4.5rem]">
           <Link href="/" className="shrink-0" aria-label="Partum Brasil — página inicial">
             <Image
               src="/logopartum-clean.png"
@@ -117,7 +115,7 @@ export default function HeaderClient({
               width={3014}
               height={1574}
               priority
-              className={`w-auto transition-[height] duration-200 ${scrolled ? "h-9" : "h-11"}`}
+              className="h-10 w-auto lg:h-11"
             />
           </Link>
 
