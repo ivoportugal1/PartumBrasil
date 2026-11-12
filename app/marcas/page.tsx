@@ -3,7 +3,7 @@ import fs from "node:fs";
 import path from "node:path";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import WhatsAppButton from "@/components/WhatsAppButton";
+import Atendimento from "@/components/Atendimento";
 import { getAllBrands } from "@/lib/products";
 import { IconChevronRight } from "@/components/icons";
 
@@ -78,7 +78,7 @@ export default function MarcasPage() {
         </div>
       </main>
       <Footer />
-      <WhatsAppButton />
+      <Atendimento />
     </>
   );
 }

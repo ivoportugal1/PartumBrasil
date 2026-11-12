@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import WhatsAppButton from "@/components/WhatsAppButton";
+import Atendimento from "@/components/Atendimento";
 import CatalogView, { type CatalogParams } from "@/components/CatalogView";
 import { getCategoryName, getCategoryCount, categories } from "@/lib/products";
 
@@ -47,7 +47,7 @@ export default async function CategoryPage({
         />
       </main>
       <Footer />
-      <WhatsAppButton />
+      <Atendimento />
     </>
   );
 }

@@ -3,7 +3,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import WhatsAppButton from "@/components/WhatsAppButton";
+import Atendimento from "@/components/Atendimento";
 import AddToCartButton from "@/components/AddToCartButton";
 import ProductCard from "@/components/ProductCard";
 import ProductImage from "@/components/ProductImage";
@@ -163,7 +163,7 @@ export default async function ProductPage({ params }: { params: Promise<{ catego
         </div>
       </main>
       <Footer />
-      <WhatsAppButton />
+      <Atendimento />
     </>
   );
 }

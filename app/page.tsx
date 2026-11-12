@@ -7,7 +7,7 @@ import Sobre from "@/components/Sobre";
 import CtaBand from "@/components/CtaBand";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
-import WhatsAppButton from "@/components/WhatsAppButton";
+import Atendimento from "@/components/Atendimento";
 
 export default function Home() {
   return (
@@ -23,7 +23,7 @@ export default function Home() {
         <Contact />
       </main>
       <Footer />
-      <WhatsAppButton />
+      <Atendimento />
     </>
   );
 }

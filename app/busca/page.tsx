@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import WhatsAppButton from "@/components/WhatsAppButton";
+import Atendimento from "@/components/Atendimento";
 import CatalogView, { type CatalogParams } from "@/components/CatalogView";
 
 export async function generateMetadata({ searchParams }: { searchParams: Promise<CatalogParams> }): Promise<Metadata> {
@@ -32,7 +32,7 @@ export default async function BuscaPage({ searchParams }: { searchParams: Promis
         />
       </main>
       <Footer />
-      <WhatsAppButton />
+      <Atendimento />
     </>
   );
 }
