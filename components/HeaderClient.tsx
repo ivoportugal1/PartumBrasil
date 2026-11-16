@@ -44,12 +44,15 @@ export default function HeaderClient({
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // fecha menus ao trocar de página
-  useEffect(() => {
+  // fecha menus ao trocar de página (ajuste de estado durante a renderização,
+  // padrão recomendado pelo React no lugar de setState dentro de useEffect)
+  const [lastPath, setLastPath] = useState(pathname);
+  if (pathname !== lastPath) {
+    setLastPath(pathname);
     setMenuOpen(false);
     setMegaOpen(false);
     setSearchOpen(false);
-  }, [pathname]);
+  }
 
   useEffect(() => {
     function onDown(e: MouseEvent) {
