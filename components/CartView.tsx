@@ -88,7 +88,9 @@ export default function CartView() {
                   {items.map(({ product, quantity }) => (
                     <li key={product.id} className="flex items-center gap-4 p-4">
                       <div className="w-20 shrink-0 overflow-hidden rounded-md border border-line">
-                        <ProductImage code={product.code} imageCode={product.imageCode} name={product.name} category={product.category} size="card" />
+                        {/* Itens vêm do navegador (localStorage), sem a lista de fotos do servidor:
+                            tenta só o .webp uma vez e, se não existir, cai na ilustração. */}
+                        <ProductImage code={product.code} imageCode={product.imageCode} name={product.name} category={product.category} hasPhoto size="card" />
                       </div>
                       <div className="min-w-0 flex-1">
                         <Link href={`/produtos/${product.category}/${product.slug}`} className="line-clamp-2 text-sm font-medium text-ink hover:text-accent">

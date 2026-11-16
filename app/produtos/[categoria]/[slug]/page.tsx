@@ -12,7 +12,16 @@ import { isFotoIlustrativa } from "@/lib/foto-ilustrativa";
 import { SITE, whatsappLink } from "@/lib/site";
 import { IconChevronRight, IconWhatsApp, IconInfo, IconPhone, IconMail, IconShieldCheck } from "@/components/icons";
 
-export const dynamic = "force-dynamic";
+/* Cache de 24h (ISR): cada produto é gerado na primeira visita e reaproveitado
+   depois, em vez de renderizar a cada requisição. generateStaticParams vazio =
+   nenhum dos ~7.450 produtos é gerado no build; sem ele o Next trata a rota
+   como dinâmica e o cache não vale (ver doc de generateStaticParams). */
+export const revalidate = 86400;
+export const dynamicParams = true;
+
+export function generateStaticParams() {
+  return [];
+}
 
 /* CA escrito no nome do produto (ex.: "CA 41562", "C.A 13.779") */
 function extractCA(name: string) {
@@ -76,7 +85,7 @@ export default async function ProductPage({ params }: { params: Promise<{ catego
           <div className="mt-5 grid overflow-hidden rounded-[var(--radius-card)] border border-line bg-white lg:grid-cols-2">
             {/* Imagem */}
             <div className="border-b border-line lg:border-b-0 lg:border-r">
-              <ProductImage code={product.code} imageCode={product.imageCode} name={product.name} category={product.category} size="large" />
+              <ProductImage code={product.code} imageCode={product.imageCode} name={product.name} category={product.category} hasPhoto={hasPhoto(product)} size="large" />
               {ilustrativa && (
                 <p className="mx-5 mb-5 flex items-start gap-2 rounded-md bg-sky px-3.5 py-2.5 text-xs leading-relaxed text-primary">
                   <IconInfo size={16} className="mt-px shrink-0" />

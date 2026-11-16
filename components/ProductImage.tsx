@@ -10,22 +10,24 @@ type Props = {
   imageCode?: string;
   name: string;
   category: string;
+  /* Se existe foto em public/produtos. Calculado no servidor com hasPhoto()
+     de lib/products, para não tentar baixar foto que não existe (cada
+     tentativa falha vira uma requisição 404 na Vercel). */
+  hasPhoto: boolean;
   size?: "card" | "large";
 };
 
-const extensions = ["webp", "jpg", "jpeg", "png"];
-
-/* Resolve a imagem do produto: foto real em public/produtos → ilustração
-   genérica (marcada como ilustrativa) → ícone da categoria. A área tem
-   proporção fixa para não haver salto de layout. */
-export default function ProductImage({ code, imageCode, name, category, size = "card" }: Props) {
+/* Resolve a imagem do produto: foto real em public/produtos (sempre .webp) →
+   ilustração genérica (marcada como ilustrativa) → ícone da categoria. A área
+   tem proporção fixa para não haver salto de layout. */
+export default function ProductImage({ code, imageCode, name, category, hasPhoto, size = "card" }: Props) {
   const effectiveCode = imageCode || code;
   const sanitizedCode = effectiveCode.replace(/[^a-zA-Z0-9_-]/g, "");
-  const [extIndex, setExtIndex] = useState(0);
+  const [fotoFalhou, setFotoFalhou] = useState(false);
   const [genericaFalhou, setGenericaFalhou] = useState(false);
 
-  const imgSrc = `/produtos/${sanitizedCode}.${extensions[extIndex]}`;
-  const failed = extIndex >= extensions.length;
+  const imgSrc = `/produtos/${sanitizedCode}.webp`;
+  const failed = !hasPhoto || fotoFalhou;
   const large = size === "large";
   const frame = `relative w-full bg-white ${large ? "aspect-square" : "aspect-[4/3]"}`;
   const pad = large ? "p-10" : "p-4";
@@ -76,7 +78,7 @@ export default function ProductImage({ code, imageCode, name, category, size = "
         unoptimized
         sizes={large ? "(min-width: 1024px) 50vw, 100vw" : "(min-width: 1024px) 20vw, 50vw"}
         className={`object-contain ${pad}`}
-        onError={() => setExtIndex((i) => i + 1)}
+        onError={() => setFotoFalhou(true)}
       />
     </div>
   );
